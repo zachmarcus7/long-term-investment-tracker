@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import {
   BanknotesIcon,
   ClockIcon,
@@ -12,16 +13,16 @@ const iconMap = {
   invoices: InboxIcon,
 };
 
-export function Card({
+export function Panel({
+  children,
   title,
-  value,
-  type,
+  icon
 }: {
+  children: React.ReactNode | Promise<JSX.Element>;
   title: string;
-  value: number | string;
-  type: 'invoices' | 'customers' | 'pending' | 'collected';
+  icon: 'invoices' | 'customers' | 'pending' | 'collected';
 }) {
-  const Icon = iconMap[type];
+  const Icon = iconMap[icon];
 
   return (
     <div className="rounded-xl bg-white p-2 shadow-sm">
@@ -29,9 +30,9 @@ export function Card({
         {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
         <h3 className="ml-2 text-sm font-medium">{title}</h3>
       </div>
-      <p className={`truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}>
-        {value}
-      </p>
+      <div>
+        {children}
+      </div>
     </div>
   );
 }
