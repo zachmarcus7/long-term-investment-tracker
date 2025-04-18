@@ -1,4 +1,3 @@
-// components/StockChart.tsx
 'use client';
 
 import { Line } from 'react-chartjs-2';
@@ -9,13 +8,19 @@ import { StockDataPoint } from '@/app/lib/definitions';
 ChartJS.register(Filler);
 ChartJS.register(TimeScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-export default function LineChart({ data }: {data: StockDataPoint[];}) {
+export default function LineChart({
+  data,
+  positive
+}: {
+  data: StockDataPoint[];
+  positive: boolean
+}) {
   const chartData = {
-    labels: data.map((point: StockDataPoint) => new Date(point.t)),
+    labels: data.map(point => new Date(point.t)),
     datasets: [
       {
         label: 'Price',
-        data: data.map((point: StockDataPoint) => point.c),
+        data: data.map(point => point.c),
         borderColor: 'oklch(69.6% 0.17 162.48)',
         borderWidth: 1.5,
         fill: true,
@@ -35,6 +40,7 @@ export default function LineChart({ data }: {data: StockDataPoint[];}) {
           const gradient = canvasCtx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
           gradient.addColorStop(0, 'oklch(76.5% 0.177 163.223 / 0.3)');
           gradient.addColorStop(1, 'oklch(76.5% 0.177 163.223 / 0)');
+        
           return gradient;
         }
       }

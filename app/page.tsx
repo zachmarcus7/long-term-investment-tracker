@@ -1,13 +1,12 @@
 
 import { Suspense } from 'react';
 import { Panel } from '@/app/ui/panel';
-import AggregateChart from '@/app/ui/aggregate-chart';
-import RoiChart from './ui/roi-chart';
-import DailyAggregateChart from './ui/daily-aggregate-chart';
+import DailyAggregateChart from '@/app/ui/daily-aggregate-chart';
+import MonthlyAggregateChart from '@/app/ui/monthly-aggregate-chart';
 
 export default async function Page() {
   return (
-    <main>
+    <main className="2xl:px-4 3xl:px-20 4xl:px-40">
 
       <h1 className={`mb-4 font-extrabold text-xl md:text-2xl`}>Long Term Overview</h1>
 
@@ -21,7 +20,7 @@ export default async function Page() {
 
         <div className="col-span-1 xl:col-span-3">
           <Panel title="Return On Investment" icon="collected">
-            <RoiChart />
+            <MonthlyAggregateChart />
           </Panel>
         </div>
 
