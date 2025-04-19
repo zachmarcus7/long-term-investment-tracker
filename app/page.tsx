@@ -1,26 +1,37 @@
 
 import { Suspense } from 'react';
 import { Panel } from '@/app/ui/panel';
+import { getDailyAggregates } from '@/app/lib/polygon-service';
 import DailyAggregateChart from '@/app/ui/daily-aggregate-chart';
 import MonthlyAggregateChart from '@/app/ui/monthly-aggregate-chart';
 
 export default async function Page() {
+  const data = await getDailyAggregates();
+
   return (
-    <main className="2xl:px-4 3xl:px-20 4xl:px-40">
+    <main className="2xl:px-4 3xl:px-20 4xl:px-54">
 
       <h1 className={`mb-4 font-extrabold text-xl md:text-2xl`}>Long Term Overview</h1>
 
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 xl:grid-cols-9">
 
         <div className="col-span-1 md:col-span-3 xl:col-span-6">
-          <Panel title="Stock Price (Past Year)" icon="trendingUp">
-            <DailyAggregateChart />
+          <Panel 
+            title="Stock Price (Past 2 Years)" 
+            icon="trendingUp"
+            heightFull={true}
+          >
+            <DailyAggregateChart data={data} />
           </Panel>
         </div>
 
         <div className="col-span-1 xl:col-span-3">
-          <Panel title="Return On Investment" icon="collected">
-            <MonthlyAggregateChart />
+          <Panel 
+            title="Return On Investment" 
+            icon="collected"
+            heightFull={true}
+          >
+            <MonthlyAggregateChart data={data} />
           </Panel>
         </div>
 

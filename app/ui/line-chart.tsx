@@ -49,6 +49,7 @@ export default function LineChart({
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     interaction: {
       mode: 'index' as const,
       intersect: false,
@@ -63,23 +64,29 @@ export default function LineChart({
           },
           tooltipFormat: 'MMM d, yyyy',
         },
-        title: {
-          display: true,
-          text: 'Date',
-        }
+        title: { display: false },
+        ticks: { 
+          color: 'oklch(70.5% 0.015 286.067)',
+          maxTicksLimit: 12
+        },
+        grid: { display: false }
       },
       y: {
-        title: {
-          display: true,
-          text: 'Price (USD)',
+        title: { display: false },
+        ticks: { color: 'oklch(70.5% 0.015 286.067)' },
+        grid: { 
+          color: 'oklch(96.7% 0.001 286.375)'
+        },
+        border: {
+          dash: [6, 6]
         }
       }
     },
     plugins: {
       legend: {
         display: false,
-      },
-    },
+      }
+    }
   };
 
   return <Line data={chartData} options={options} />;

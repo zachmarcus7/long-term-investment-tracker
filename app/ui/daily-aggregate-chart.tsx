@@ -1,16 +1,20 @@
-import { getDailyAggregates } from "@/app/lib/polygon-service";
 import LineChart from "@/app/ui/line-chart";
 import { ArrowUpRightIcon, ArrowDownLeftIcon } from "@heroicons/react/24/outline";
 import { getYearlyChange, getPercentChange } from "@/app/lib/polygon-utils";
+import { DailyData } from "@/app/lib/definitions";
 
-export default async function DailyAggregateChart({}: {}) {
-  const data = await getDailyAggregates();
+export default async function DailyAggregateChart({
+  data
+}: {
+  data: DailyData[]
+}) {
   const yearlyChange = getYearlyChange(data);
   const percentChange = getPercentChange(data);
   const positive = percentChange >= 0;
 
   return (
-    <>
+    <div className="h-full flex flex-col justify-between">
+
       <div className="w-full flex items-end justify-between pb-2 lg:pb-3 lg:pl-4 lg:pr-2">
 
         <div className="flex items-end gap-2">
@@ -24,19 +28,19 @@ export default async function DailyAggregateChart({}: {}) {
           }
         </div>
 
-        <p className="max-lg:mb-1 px-3 py-0.5 rounded-xl text-xs lg:text-sm bg-emerald-200/50 text-emerald-500">
-          {positive? 'Up' : 'Down'} {percentChange}% <span className="max-lg:hidden">Past Year</span>
+        <p className={`max-lg:mb-1 px-3 py-0.5 rounded-xl font-bold text-xs lg:text-sm ${positive ? 'bg-emerald-200/50 text-emerald-500' : ''}`}>
+          {positive? 'Up' : 'Down'} {percentChange}% <span className="max-lg:hidden">Past 2 Years</span>
         </p>
 
       </div>
 
-      <div>
+      <div className="2xl:h-[450px]">
         <LineChart 
           data={data}
           positive={positive}
         />
       </div>
 
-    </>
+    </div>
   );
 }

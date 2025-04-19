@@ -23,8 +23,6 @@ export default function BarChart({
     datasets: [
       {
         data: chartData.map(d => d.roi),
-        borderWidth: 1,
-        borderColor: chartData.map(d => d.roi >= 0 ? 'oklch(84.5% 0.143 164.978)' : 'oklch(58.6% 0.253 17.585)'),
         backgroundColor: (ctx: ScriptableContext<'bar'>) => {
           const chart = ctx.chart;
           const { chartArea, ctx: canvasCtx } = chart;
@@ -40,19 +38,20 @@ export default function BarChart({
             gradient.addColorStop(0, 'oklch(84.5% 0.143 164.978 / 0.7)');
             gradient.addColorStop(1, 'oklch(84.5% 0.143 164.978 / 0.1)');
           } else {
-            gradient.addColorStop(0, 'oklch(58.6% 0.253 17.585 / 0.1)');
-            gradient.addColorStop(1, 'oklch(58.6% 0.253 17.585 / 0.7)');
+            gradient.addColorStop(0, 'oklch(57.7% 0.245 27.325 / 0.1)');
+            gradient.addColorStop(1, 'oklch(57.7% 0.245 27.325 / 0.7)');
           }
         
           return gradient;
         },
-        borderRadius: 6,
+        borderRadius: 3,
       },
     ],
   };
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       tooltip: {
         callbacks: {
@@ -67,11 +66,25 @@ export default function BarChart({
         ticks: {
           callback: function (val: any) {
             return `${val}%`;
+          },
+          color: 'oklch(70.5% 0.015 286.067)'
+        },
+        grid: { 
+          color: 'oklch(96.7% 0.001 286.375)',
+        },
+        border: {
+          dash: [6, 6]
+        }
+      },
+      x: {
+        ticks: { 
+          color: 'oklch(70.5% 0.015 286.067)',
+          maxTicksLimit: 6,
+          callback: function(value: any) {
+            return chartData[value].label.split(" ")[0];
           }
         },
-        grid: {
-          display: false
-        }
+        grid: { display: false }
       }
     }
   };

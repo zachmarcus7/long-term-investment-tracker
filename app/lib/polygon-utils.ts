@@ -1,11 +1,46 @@
-import { Revenue } from '@/app/lib/definitions';
+import { DailyData, MonthlyData, Revenue, RoiData } from '@/app/lib/definitions';
+
+/**
+ * 
+ * @param dailyData 
+ * @returns 
+ */
+export function aggregateToMonthly(dailyData: DailyData[]): MonthlyData[] {
+  const grouped: Record<string, DailyData[]> = {};
+
+  for (const day of dailyData) {
+    const date = new Date(day.t);
+    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-01`;
+
+    if (!grouped[monthKey]) {
+      grouped[monthKey] = [];
+    }
+    grouped[monthKey].push(day);
+  }
+
+  const result: MonthlyData[] = [];
+
+  for (const [month, days] of Object.entries(grouped)) {
+    days.sort((a, b) => a.t - b.t);
+    const open = days[0].o;
+    const close = days[days.length - 1].c;
+    const high = Math.max(...days.map(d => d.h));
+    const low = Math.min(...days.map(d => d.l));
+    const volume = days.reduce((sum, d) => sum + d.v, 0);
+
+    result.push({ month, o: open, h: high, l: low, c: close, v: volume });
+  }
+
+  // Sort months chronologically
+  return result.sort((a, b) => new Date(a.month).getTime() - new Date(b.month).getTime());
+}
 
 /**
  * 
  * @param data 
  * @returns 
  */
-export function calculateMonthlyROI(data: any[]) {
+export function calculateMonthlyROI(data: MonthlyData[]) {
   const roiData = [];
 
   for (let i = 1; i < data.length; i++) {
@@ -14,12 +49,27 @@ export function calculateMonthlyROI(data: any[]) {
     const roi = ((currentClose - prevClose) / prevClose) * 100;
 
     roiData.push({
-      label: new Date(data[i].t).toLocaleString('default', { month: 'short' }),
+      label: new Date(data[i].month).toLocaleString('default', { month: 'short', year: 'numeric' }),
       roi: parseFloat(roi.toFixed(2))
     });
   }
 
   return roiData;
+}
+
+/**
+ * 
+ * @param data 
+ * @returns 
+ */
+export function calculateAverageMonthlyROI(data: RoiData[]) {
+  if (data.length === 0) return 0;
+
+  console.log(data.length);
+  console.log(data);
+
+  const total = data.reduce((sum, item) => sum + item.roi, 0);
+  return parseFloat((total / data.length).toFixed(2));
 }
 
 /**
@@ -46,7 +96,7 @@ export const generateYAxis = (revenue: Revenue[]) => {
  * @param data 
  * @returns 
  */
-export function getYearlyChange(data: any[]): number {
+export function getYearlyChange(data: DailyData[]): number {
   if (data.length === 0 || data.length === 1) {
     return 0;
   }
@@ -58,7 +108,7 @@ export function getYearlyChange(data: any[]): number {
  * @param data 
  * @returns 
  */
-export function getPercentChange(data: any[]): number {
+export function getPercentChange(data: DailyData[]): number {
   if (data.length === 0 || data.length === 1) {
     return 0;
   }
