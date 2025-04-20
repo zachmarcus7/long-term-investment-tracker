@@ -6,3 +6,17 @@
   --breakpoint-3xl: 120rem;     /* 1920px */
   --breakpoint-4xl: 136.25rem;  /* 2180px */
 }
+
+@font-face {
+  font-family: "hb";
+  src: url("/fonts/HussarBold-7mRE.otf") format("opentype");
+  font-style: normal;
+}
+
+.hb {
+  font-family: "hb", sans-serif !important;
+}
+
+.bg-test {
+  background-color: oklch(0.32 0.04 254.93);
+}

@@ -63,11 +63,9 @@ export function calculateMonthlyROI(data: MonthlyData[]) {
  * @returns 
  */
 export function calculateAverageMonthlyROI(data: RoiData[]) {
-  if (data.length === 0) return 0;
-
-  console.log(data.length);
-  console.log(data);
-
+  if (data.length === 0) 
+    return 0;
+  
   const total = data.reduce((sum, item) => sum + item.roi, 0);
   return parseFloat((total / data.length).toFixed(2));
 }
