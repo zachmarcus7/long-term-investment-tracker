@@ -1,20 +1,21 @@
-
-import { Suspense } from 'react';
 import { Panel } from '@/app/ui/panel';
 import { getDailyAggregates } from '@/app/lib/polygon-service';
-import { getBasicFinancials } from '@/app/lib/finn-hub-service';
+import { getBasicFinancials, getCompanyProfile } from '@/app/lib/finn-hub-service';
 import DailyAggregateChart from '@/app/ui/daily-aggregate-chart';
 import MonthlyAggregateChart from '@/app/ui/monthly-aggregate-chart';
-import FinancialOverviewList from '@/app/ui/financial-overview-list';
+import FinancialOverviewPanel from '@/app/ui/financial-overview-panel';
+import RiskGrowthPanel from '@/app/ui/risk-growth-panel';
+import DividendsEarningsChart from '@/app/ui/dividends-earnings-chart';
 
 export default async function Page() {
   const polygonData = await getDailyAggregates();
-  const finnhubData = await getBasicFinancials();
+  const companyMetrics = await getBasicFinancials();
+  const companyProfile = await getCompanyProfile();
 
   return (
     <main className="2xl:px-4 3xl:px-20 4xl:px-54">
 
-      <h1 className={`mb-4 font-extrabold text-xl md:text-2xl`}>Long Term Overview</h1>
+      <h1 className="mb-4 font-extrabold text-xl md:text-2xl">Long Term Overview</h1>
 
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 xl:grid-cols-9">
 
@@ -32,7 +33,10 @@ export default async function Page() {
             title="Return On Investment" 
             heightFull={true}
           >
-            <MonthlyAggregateChart data={polygonData} />
+            <MonthlyAggregateChart 
+              data={polygonData}
+              selectedTicker={'AAPL'}
+            />
           </Panel>
         </div>
 
@@ -42,16 +46,15 @@ export default async function Page() {
 
       <div className="mt-6 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
 
-        <Panel title="Financial Overview">
-          <FinancialOverviewList data={finnhubData} />
-        </Panel>
+        <FinancialOverviewPanel data={companyMetrics} />
 
-        <Panel title="Dividends">
-          test
-        </Panel>
+        <RiskGrowthPanel data={companyMetrics} />
 
-        <Panel title="Total Invoices">
-          test
+        <Panel title="Dividends Test">
+          <DividendsEarningsChart 
+            data={companyMetrics}
+            shareOutstanding={companyProfile.shareOutstanding}
+          />
         </Panel>
 
         <Panel title="Total Customers">
