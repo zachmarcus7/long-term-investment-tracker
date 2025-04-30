@@ -2,13 +2,22 @@ import { PlusIcon } from "@heroicons/react/16/solid";
 
 export default function PrimaryButton({
   text,
-  showPlusIcon = false
+  showPlusIcon = false,
+  onClick,
+  disabled = false
 }: {
   text: string;
   showPlusIcon?: boolean;
+  onClick: () => void;
+  disabled?: boolean;
 }) {
+  const handleClick = () => {
+    if (!disabled) onClick();
+  }
+
   return (
-    <button 
+    <button
+      onClick={handleClick}
       className={`
         w-full 
         bg-emerald-500 
@@ -17,12 +26,12 @@ export default function PrimaryButton({
         text-white 
         font-bold 
         text-sm 
-        cursor-pointer 
         shadow-sm 
         hover:bg-emerald-600 
         transition-all ease
         flex
         justify-center
+        ${disabled ? 'cursor-not-allowed bg-emerald-600' : 'cursor-pointer'}
       `}
     >
       {showPlusIcon && <PlusIcon height={20} width={20} />}

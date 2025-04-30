@@ -38,8 +38,8 @@ export default function BarChart({
             gradient.addColorStop(0, 'oklch(84.5% 0.143 164.978 / 0.7)');
             gradient.addColorStop(1, 'oklch(84.5% 0.143 164.978 / 0.1)');
           } else {
-            gradient.addColorStop(0, 'oklch(57.7% 0.245 27.325 / 0.1)');
-            gradient.addColorStop(1, 'oklch(57.7% 0.245 27.325 / 0.7)');
+            gradient.addColorStop(0, 'oklch(0.73 0.16 19.95 / 0.1)');
+            gradient.addColorStop(1, 'oklch(0.73 0.16 19.95 / 0.7)');
           }
         
           return gradient;
@@ -67,7 +67,7 @@ export default function BarChart({
           callback: function (val: any) {
             return `${val}%`;
           },
-          color: 'oklch(70.5% 0.015 286.067)'
+          color: 'oklch(0.76 0.04 269.54)'
         },
         grid: { 
           color: 'oklch(96.7% 0.001 286.375)',
@@ -78,7 +78,7 @@ export default function BarChart({
       },
       x: {
         ticks: { 
-          color: 'oklch(70.5% 0.015 286.067)',
+          color: 'oklch(0.76 0.04 269.54)',
           maxTicksLimit: 6,
           callback: function(value: any) {
             return chartData[value].label.split(" ")[0];

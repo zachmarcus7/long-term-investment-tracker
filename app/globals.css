@@ -1,22 +1,43 @@
 @import "tailwindcss";
 
-@theme {
-  --breakpoint-1xl: 90rem;      /* 1440px */
-  --breakpoint-2-5xl: 108rem;   /* 1728px */
-  --breakpoint-3xl: 120rem;     /* 1920px */
-  --breakpoint-4xl: 136.25rem;  /* 2180px */
-}
-
 @font-face {
   font-family: "hb";
   src: url("/fonts/HussarBold-7mRE.otf") format("opentype");
   font-style: normal;
 }
 
-.hb {
-  font-family: "hb", sans-serif !important;
+@theme {
+  --breakpoint-1xl: 90rem; /* 1440px */
+  --breakpoint-2-5xl: 108rem; /* 1728px */
+  --breakpoint-3xl: 120rem; /* 1920px */
+  --breakpoint-4xl: 136.25rem; /* 2180px */
+  --font-hb: "hb", sans-serif !important;
+  --shadow-smooth: 0 6px 16px rgba(0, 0, 0, 0.04);
+  --shadow-5xl: 0 9px 46px 8px rgba(0,0,0,.12),0 24px 38px 3px rgba(0,0,0,.14),0 11px 15px rgba(0,0,0,.2)!important;
+  --color-greyish-300: oklch(0.76 0.04 269.54);
+  --color-greyish-400: oklch(0.65 0.04 269.45);
+  --color-blueish-600: oklch(0.38 0.04 254.93);
+  --color-reddish-500: oklch(0.73 0.16 19.95);
 }
 
-.bg-test {
-  background-color: oklch(0.32 0.04 254.93);
+.bg-main {
+  background: radial-gradient(
+    circle at 20% 20%, 
+    #f7f8ff, 
+    #f4f6f9, 
+    #ebeff5
+  );
+}
+
+.bg-nav {
+  background: radial-gradient(
+    circle at 20% 20%,
+    oklch(0.5 0.04 254.93),
+    oklch(0.38 0.04 254.93),
+    oklch(0.32 0.04 254.93)
+  );
+}
+
+input::placeholder {
+  font-style: italic;
 }

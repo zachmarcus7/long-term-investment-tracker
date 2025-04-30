@@ -66,14 +66,14 @@ export default function LineChart({
         },
         title: { display: false },
         ticks: { 
-          color: 'oklch(70.5% 0.015 286.067)',
+          color: 'oklch(0.76 0.04 269.54)',
           maxTicksLimit: 12
         },
         grid: { display: false }
       },
       y: {
         title: { display: false },
-        ticks: { color: 'oklch(70.5% 0.015 286.067)' },
+        ticks: { color: 'oklch(0.76 0.04 269.54)' },
         grid: { 
           color: 'oklch(96.7% 0.001 286.375)'
         },

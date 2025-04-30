@@ -17,7 +17,7 @@ export default async function MonthlyAggregateChart({
     <div className="flex flex-col justify-between h-full">
 
       <div>
-        <p className="text-xs text-zinc-400 pb-8 lg:text-sm 3xl:pr-4">
+        <p className="text-xs text-greyish-300 pb-8 leading-[1.6] lg:text-sm 3xl:pr-4">
           This shows the monthly return on investment compared to the previous month. For
           <span className="pl-1 font-extrabold text-emerald-500">{selectedTicker}</span> 
           , the monthly average for the past 2 years was

@@ -37,7 +37,30 @@ export type RoiData = {
   roi: number;
 };
 
-export interface StockDataPoint {
+export type StockDataPoint = {
   t: number;
   c: number;
 };
+
+export type StockSymbol = {
+  currency: string;
+  description: string;
+  displaySymbol: string;
+  figi: string;
+  isin?: string;
+  mic: string;
+  shareClassFIGI: string;
+  symbol: string;
+  symbol2: string;
+  type: string;
+}
+
+export type RecommendationData = {
+  buy: number;
+  hold: number;
+  period: string;
+  sell: number;
+  strongBuy: number;
+  strongSell: number;
+  symbol: string;
+}

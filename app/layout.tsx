@@ -9,15 +9,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased bg-test`}> 
+      <body className={`${inter.className} antialiased`}> 
 
         <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
 
-          <div className="w-full flex-none md:w-48 3xl:w-72">
+          <div className="w-full flex-none md:w-48 2xl:w-66 3xl:w-76 bg-nav">
             <SideNav />
           </div>
 
-          <div className="flex-grow p-6 md:overflow-y-auto md:p-12 bg-white shadow-2xl lg:rounded-4xl mt-1 mr-1 mb-1">
+          <div className="flex-grow p-6 md:overflow-y-auto md:p-12 shadow-3xl bg-main">
             {children}
           </div>
 

@@ -1,10 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PrimaryButton from "@/app/ui/primary-button";
+import Dialog from "@/app/ui/dialog";
+import NewStockForm from "@/app/ui/new-stock-form";
+import { getStockSymbols } from "@/app/lib/finn-hub-service";
 
 export default function SideNav() {
   const [currIndex, setCurrIndex] = useState(0);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [stockSymbols, setStockSymbols] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const symbols = await getStockSymbols();
+      setStockSymbols(symbols);
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -12,7 +25,7 @@ export default function SideNav() {
       {/* Top Level */}
       <div className="w-full flex items-center justify-center pr-4 pt-10 pb-8">
         <img src="/logo.svg" alt="App Logo" />
-        <h5 className="text-white font-bold pl-2 hb">long term track</h5>
+        <h5 className="text-white font-bold pl-2 font-hb">long term track</h5>
       </div>
 
       {/* Add Button */}
@@ -20,6 +33,7 @@ export default function SideNav() {
         <PrimaryButton
           text="Track New Stock"
           showPlusIcon={true}
+          onClick={() => {setIsDialogOpen(true)}}
         />
       </div>
 
@@ -43,6 +57,16 @@ export default function SideNav() {
         </li>
 
       </ul>
+
+      {/* Dialog for adding stock tickers */}
+      <Dialog 
+        isOpen={isDialogOpen} 
+        onOpen={() => {}}
+        onClose={() => {setIsDialogOpen(false)}}
+        title="Track New Stock"
+      >
+        <NewStockForm data={stockSymbols} />
+      </Dialog>
 
     </>
   );

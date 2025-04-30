@@ -10,15 +10,15 @@ export function Panel({
   heightFull?: boolean;
 }) {
   return (
-    <div className={`rounded-3xl p-2 bg-white shadow-sm border border-slate-100 ${heightFull && 'h-full'}`}>
+    <div className={`rounded-4xl p-2 bg-white shadow-smooth relative lg:p-3 2xl:p-4 h-full`}>
 
       {/* Header */}
       <div className="flex p-2 lg:p-4">
-        <h3 className="text-sm font-bold hb">{title}</h3>
+        <h3 className="text-sm font-bold font-hb text-blueish-600">{title}</h3>
       </div>
 
       {/* Body */}
-      <div className={`p-2 lg:p-4 ${heightFull && 'lg:h-[90%]'}`}>
+      <div className={`p-2 lg:p-4 lg:h-[90%]`}>
         {children}
       </div>
 

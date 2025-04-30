@@ -9,28 +9,28 @@ export default function FinancialOverviewPanel({data}: {data: any}) {
   return (
     <Panel title="Financial Overview">
       <div className="flex w-full justify-between mb-2">
-        <p className="text-zinc-400 text-sm">Market Cap</p>
-        <h6 className="font-bold text-base">${formatMarketCap(data.metric.marketCapitalization)}</h6>
+        <h6 className="text-greyish-300 text-sm">Market Cap</h6>
+        <p className="font-bold text-base text-blueish-600">${formatMarketCap(data.metric.marketCapitalization)}</p>
       </div>
 
       <div className="flex w-full justify-between mb-2">
-        <p className="text-zinc-400 text-sm">1 Year High</p>
-        <h6 className="font-bold text-base">${data.metric['52WeekHigh']}</h6>
+        <h6 className="text-greyish-300 text-sm">1 Year High</h6>
+        <p className="font-bold text-base text-blueish-600">${data.metric['52WeekHigh']}</p>
       </div>
 
       <div className="flex w-full justify-between mb-2">
-        <p className="text-zinc-400 text-sm">1 Year Low</p>
-        <h6 className="font-bold text-base">${data.metric['52WeekLow']}</h6>
+        <h6 className="text-greyish-300 text-sm">1 Year Low</h6>
+        <p className="font-bold text-base text-blueish-600">${data.metric['52WeekLow']}</p>
       </div>
 
       <div className="flex w-full justify-between mb-2">
-        <p className="text-zinc-400 text-sm">P/E Ratio</p>
-        <h6 className="font-bold text-base">{data.metric.peNormalizedAnnual?.toFixed(2)}</h6>
+        <h6 className="text-greyish-300 text-sm">P/E Ratio</h6>
+        <p className="font-bold text-base text-blueish-600">{data.metric.peNormalizedAnnual?.toFixed(2)}</p>
       </div>
 
       <div className="flex w-full justify-between mb-2">
-        <p className="text-zinc-400 text-sm">P/B Ratio</p>
-        <h6 className="font-bold text-base">{data.metric.pbAnnual?.toFixed(2)}</h6>
+        <h6 className="text-greyish-300 text-sm">P/B Ratio</h6>
+        <p className="font-bold text-base text-blueish-600">{data.metric.pbAnnual?.toFixed(2)}</p>
       </div>
     </Panel>
   );

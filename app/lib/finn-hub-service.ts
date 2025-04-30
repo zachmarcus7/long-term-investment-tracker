@@ -27,8 +27,33 @@ export async function getCompanyProfile(ticker: string = "AAPL") {
   if (!res.ok)
     throw new Error(`Failed to fetch stock data for ${ticker}`);
 
-  var result = await res.json();
-  console.log(result);
+  return await res.json();
+}
 
-  return result;
+/**
+ * 
+ * @param ticker 
+ * @returns 
+ */
+export async function getRecommendations(ticker: string = "AAPL") {
+  const res = await fetch(`${BASE_URL}/stock/recommendation?symbol=AAPL&token=${API_KEY}`);
+
+  if (!res.ok)
+    throw new Error(`Failed to fetch recommendations for ${ticker}`);
+
+  return await res.json();
+}
+
+/**
+ * 
+ * @param ticker 
+ * @returns 
+ */
+export async function getStockSymbols() {
+  const res = await fetch(`${BASE_URL}/stock/symbol?exchange=US&token=${API_KEY}`);
+
+  if (!res.ok)
+    throw new Error(`Failed to fetch stock symbols`);
+
+  return await res.json();
 }
