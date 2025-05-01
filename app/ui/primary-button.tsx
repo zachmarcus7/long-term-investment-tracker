@@ -4,12 +4,14 @@ export default function PrimaryButton({
   text,
   showPlusIcon = false,
   onClick,
-  disabled = false
+  disabled = false,
+  loading = false
 }: {
   text: string;
   showPlusIcon?: boolean;
   onClick: () => void;
   disabled?: boolean;
+  loading?: boolean;
 }) {
   const handleClick = () => {
     if (!disabled) onClick();
@@ -31,11 +33,12 @@ export default function PrimaryButton({
         transition-all ease
         flex
         justify-center
-        ${disabled ? 'cursor-not-allowed bg-emerald-600' : 'cursor-pointer'}
+        ${(disabled || loading) ? 'cursor-not-allowed bg-emerald-600' : 'cursor-pointer'}
       `}
     >
-      {showPlusIcon && <PlusIcon height={20} width={20} />}
-      <span className="pr-4 ml-2">{text}</span>
+      {!loading && showPlusIcon && <PlusIcon height={20} width={20} />}
+      {!loading &&<span className="pr-4 ml-2">{text}</span>}
+      {loading && <div className="loader-circle"></div>}
     </button>
   );
 }

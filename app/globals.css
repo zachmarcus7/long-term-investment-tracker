@@ -41,3 +41,12 @@
 input::placeholder {
   font-style: italic;
 }
+
+.loader-circle {
+  border: 4px solid rgba(0,0,0,0.1);
+  border-top-color: white;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  animation: spin 1s linear infinite;
+}

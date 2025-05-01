@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 import { inter } from "@/app/ui/fonts";
 import SideNav from '@/app/ui/sidenav';
+import { Toaster } from 'react-hot-toast';
 
 export default function RootLayout({
   children,
@@ -23,6 +24,7 @@ export default function RootLayout({
 
         </div>
 
+        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
   );

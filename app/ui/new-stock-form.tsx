@@ -1,15 +1,26 @@
 "use client";
 
+import { useState, useMemo } from 'react';
 import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react';
-import { useState, useEffect, useMemo } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import PrimaryButton from "@/app/ui/primary-button";
 import { StockSymbol } from '@/app/lib/definitions';
 
-export default function NewStockForm({ data }: { data: StockSymbol[] }) {
+export default function NewStockForm({
+  data,
+  onNewStockSubmit,
+  pendingAdd
+}: { 
+  data: StockSymbol[],
+  onNewStockSubmit: (selectedStock: StockSymbol) => void,
+  pendingAdd: boolean;
+}) {
   const [selectedStock, setSelectedStock] = useState<StockSymbol | null>(null);
   const [query, setQuery] = useState('');
 
+  /**
+   * 
+   */
   const filteredStocks = useMemo(() => {
     const lower = query.toLowerCase();
     return query === ''
@@ -21,6 +32,11 @@ export default function NewStockForm({ data }: { data: StockSymbol[] }) {
         );
   }, [query, data]);
 
+  /**
+   * 
+   * @param param0 
+   * @returns 
+   */
   const Row = ({ index, style }: { index: number; style: React.CSSProperties }) => {
     const stock = filteredStocks[index];
     return (
@@ -34,6 +50,7 @@ export default function NewStockForm({ data }: { data: StockSymbol[] }) {
 
   return (
     <div className="h-40 flex flex-col justify-between">
+
       <div>
 
         <h6 className="text-greyish-400 pb-2">Available Stocks</h6>
@@ -44,12 +61,12 @@ export default function NewStockForm({ data }: { data: StockSymbol[] }) {
             aria-label="Stock Symbol"
             displayValue={(stock: StockSymbol) => stock?.symbol}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full p-2 rounded border border-greyish-300 placeholder-greyish-300/90 bg-greyish-300/5 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 text-blueish-600"
+            className="w-full p-2 rounded placeholder-greyish-300 bg-greyish-300/15 focus:outline-none text-blueish-600"
             placeholder="Type Stock Name Here..."
           />
 
           {filteredStocks.length > 0 && (
-            <ComboboxOptions className="absolute mt-1 bg-white border border-greyish-300/20 rounded shadow-xl z-10">
+            <ComboboxOptions className="absolute mt-1 bg-white rounded-xl shadow-2xl z-10">
               <List
                 height={250}
                 width={436}
@@ -68,11 +85,8 @@ export default function NewStockForm({ data }: { data: StockSymbol[] }) {
         text="Track Stock"
         showPlusIcon={true}
         disabled={selectedStock === null}
-        onClick={() => {
-          if (selectedStock) {
-            console.log("Selected stock:", selectedStock);
-          }
-        }}
+        loading={pendingAdd}
+        onClick={() => {onNewStockSubmit(selectedStock!)}}
       />
   
     </div>
