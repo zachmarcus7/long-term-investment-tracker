@@ -2,7 +2,7 @@ import { aggregateToMonthly, calculateMonthlyROI, calculateAverageMonthlyROI } f
 import BarChart from '@/app/ui/bar-chart';
 import { DailyData } from '@/app/lib/definitions';
 
-export default async function MonthlyAggregateChart({
+export default function MonthlyAggregateChart({
   data,
   selectedTicker
 }: {
@@ -21,7 +21,7 @@ export default async function MonthlyAggregateChart({
           This shows the monthly return on investment compared to the previous month. For
           <span className="pl-1 font-extrabold text-emerald-500">{selectedTicker}</span> 
           , the monthly average for the past 2 years was
-          <span className={`pl-1 font-extrabold ${avgData >= 0 ? 'text-emerald-500': ''}`}>{avgData}%</span>.
+          <span className={`pl-1 font-extrabold ${avgData >= 0 ? 'text-emerald-500': 'text-reddish-500'}`}>{avgData}%</span>.
         </p>
       </div>
 

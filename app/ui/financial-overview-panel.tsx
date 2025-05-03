@@ -10,27 +10,42 @@ export default function FinancialOverviewPanel({data}: {data: any}) {
     <Panel title="Financial Overview">
       <div className="flex w-full justify-between mb-2">
         <h6 className="text-greyish-300 text-sm">Market Cap</h6>
-        <p className="font-bold text-base text-blueish-600">${formatMarketCap(data.metric.marketCapitalization)}</p>
+        {data.metric.marketCapitalization  
+          ? <p className="font-bold text-base text-blueish-600">${formatMarketCap(data.metric.marketCapitalization)}</p>
+          : <p className="font-bold text-base text-greyish-300">-</p>
+        }
       </div>
 
       <div className="flex w-full justify-between mb-2">
         <h6 className="text-greyish-300 text-sm">1 Year High</h6>
-        <p className="font-bold text-base text-blueish-600">${data.metric['52WeekHigh']}</p>
+        {data.metric['52WeekHigh'] 
+          ? <p className="font-bold text-base text-blueish-600">${data.metric['52WeekHigh']}</p>
+          : <p className="font-bold text-base text-greyish-300">-</p>
+        }
       </div>
 
       <div className="flex w-full justify-between mb-2">
         <h6 className="text-greyish-300 text-sm">1 Year Low</h6>
-        <p className="font-bold text-base text-blueish-600">${data.metric['52WeekLow']}</p>
+        {data.metric['52WeekLow']
+          ? <p className="font-bold text-base text-blueish-600">${data.metric['52WeekLow']}</p>
+          : <p className="font-bold text-base text-greyish-300">-</p>
+        }
       </div>
 
       <div className="flex w-full justify-between mb-2">
         <h6 className="text-greyish-300 text-sm">P/E Ratio</h6>
-        <p className="font-bold text-base text-blueish-600">{data.metric.peNormalizedAnnual?.toFixed(2)}</p>
+        {data.metric.peNormalizedAnnual
+          ? <p className="font-bold text-base text-blueish-600">{data.metric.peNormalizedAnnual?.toFixed(2)}</p>
+          : <p className="font-bold text-base text-greyish-300">-</p>
+        }
       </div>
 
       <div className="flex w-full justify-between mb-2">
         <h6 className="text-greyish-300 text-sm">P/B Ratio</h6>
-        <p className="font-bold text-base text-blueish-600">{data.metric.pbAnnual?.toFixed(2)}</p>
+        {data.metric.pbAnnual
+          ? <p className="font-bold text-base text-blueish-600">{data.metric.pbAnnual?.toFixed(2)}</p>
+          : <p className="font-bold text-base text-greyish-300">-</p>
+        }
       </div>
     </Panel>
   );

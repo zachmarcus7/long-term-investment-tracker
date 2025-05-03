@@ -21,10 +21,9 @@ export default function LineChart({
       {
         label: 'Price',
         data: data.map(point => point.c),
-        borderColor: 'oklch(69.6% 0.17 162.48)',
+        borderColor: positive ? 'oklch(69.6% 0.17 162.48)' : 'oklch(0.67 0.18 21.29)',
         borderWidth: 1.5,
         fill: true,
-        fillColor: "red",
         tension: 0.1,
         pointRadius: 0,
         pointHoverRadius: 0,
@@ -34,12 +33,18 @@ export default function LineChart({
         
           // Make sure chartArea is available
           if (!chartArea) {
-            return 'rgba(75, 192, 192, 0.2)';
+            return 'oklch(0.76 0.04 269.54 / 0.3)';
           }
         
           const gradient = canvasCtx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-          gradient.addColorStop(0, 'oklch(76.5% 0.177 163.223 / 0.3)');
-          gradient.addColorStop(1, 'oklch(76.5% 0.177 163.223 / 0)');
+
+          if (positive) {
+            gradient.addColorStop(0, 'oklch(76.5% 0.177 163.223 / 0.3)');
+            gradient.addColorStop(1, 'oklch(76.5% 0.177 163.223 / 0)');
+          } else {
+            gradient.addColorStop(1, 'oklch(0.73 0.16 19.95 / 0.1)');
+            gradient.addColorStop(0, 'oklch(0.73 0.16 19.95 / 0.7)');
+          }
         
           return gradient;
         }

@@ -1,5 +1,4 @@
 const BASE_URL =`https://finnhub.io/api/v1`;
-//const API_KEY = process.env.FINN_HUB_API_KEY;
 const API_KEY = "cvsk6q9r01qhup0raco0cvsk6q9r01qhup0racog";
 
 /**
@@ -22,7 +21,7 @@ export async function getBasicFinancials(ticker: string = "AAPL") {
  * @returns 
  */
 export async function getCompanyProfile(ticker: string = "AAPL") {
-  const res = await fetch(`${BASE_URL}/stock/profile2?symbol=AAPL&token=${API_KEY}`);
+  const res = await fetch(`${BASE_URL}/stock/profile2?symbol=${ticker}&token=${API_KEY}`);
 
   if (!res.ok)
     throw new Error(`Failed to fetch stock data for ${ticker}`);
@@ -36,7 +35,7 @@ export async function getCompanyProfile(ticker: string = "AAPL") {
  * @returns 
  */
 export async function getRecommendations(ticker: string = "AAPL") {
-  const res = await fetch(`${BASE_URL}/stock/recommendation?symbol=AAPL&token=${API_KEY}`);
+  const res = await fetch(`${BASE_URL}/stock/recommendation?symbol=${ticker}&token=${API_KEY}`);
 
   if (!res.ok)
     throw new Error(`Failed to fetch recommendations for ${ticker}`);

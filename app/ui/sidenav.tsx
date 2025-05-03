@@ -9,8 +9,13 @@ import { trackNewStock, retrieveTrackedStocks } from '@/app/lib/local-storage-se
 import { showSuccessToast, showErrorToast } from '@/app/lib/toast-utils';
 import { StockSymbol } from '@/app/lib/definitions';
 
-export default function SideNav() {
-  const [currIndex, setCurrIndex] = useState(0);
+export default function SideNav({
+  onStockChange,
+  selectedStock
+}: {
+  onStockChange: (symbol: string) => void,
+  selectedStock: string
+}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [stockSymbols, setStockSymbols] = useState([]);
   const [pendingAdd, setPendingAdd] = useState(false);
@@ -60,14 +65,6 @@ export default function SideNav() {
 
   /**
    * 
-   * @param index 
-   */
-  const handleNavClick = (index: number) => {
-    setCurrIndex(index);
-  }
-
-  /**
-   * 
    * @param word 
    * @returns 
    */
@@ -95,19 +92,19 @@ export default function SideNav() {
       </div>
 
       {/* Side Links */}
-      <h6 className="text-xs text-zinc-400 pb-2 font-base pl-4">TRACKED STOCKS</h6>
+      <h6 className="text-xs text-greyish-400 pb-2 font-base pl-4">TRACKED STOCKS</h6>
 
       <ul className="w-full mb-4">
-        {trackedStocks.map((symbol: string, index: number) => (
+        {trackedStocks.map((stock: string, index: number) => (
           <li 
             key={index} 
-            className={`flex items-center py-2 cursor-pointer pl-4 transition-all ease ${currIndex === index ? 'border-l-4 border-l-emerald-400 bg-white/10 w-full' : 'hover:bg-white/5'}`}
-            onClick={() => handleNavClick(index)}
+            className={`flex items-center py-2 cursor-pointer pl-4 transition-all ease ${stock === selectedStock ? 'border-l-4 border-l-emerald-400 bg-white/10 w-full' : 'hover:bg-white/5'}`}
+            onClick={() => {onStockChange(stock)}}
           >
             <div className="w-16">
-              <p className="text-xs text-zinc-200">{symbol.split('\\')[0]}</p>
+              <p className="text-xs text-zinc-200">{stock.split('\\')[0]}</p>
             </div>
-            <p className="text-white text-base">{capitalizeFirstLetter(symbol.split('\\')[1].split(' ')[0])}</p>
+            <p className="text-white text-base">{capitalizeFirstLetter(stock.split('\\')[1].split(' ')[0])}</p>
           </li>
         ))}
       </ul> 

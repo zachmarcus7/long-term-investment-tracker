@@ -1,5 +1,4 @@
 const BASE_URL =`https://api.polygon.io/v2`;
-//const API_KEY = process.env.POLYGON_API_KEY;
 const API_KEY = "NbONcR7tNxv8Y04sQv1p2WtwXl3QpbVR";
 
 /**

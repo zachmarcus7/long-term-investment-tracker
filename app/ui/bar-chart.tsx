@@ -28,7 +28,7 @@ export default function BarChart({
           const { chartArea, ctx: canvasCtx } = chart;
         
           if (!chartArea) {
-            return 'rgba(75, 192, 192, 0.2)';
+            return 'oklch(0.76 0.04 269.54 / 0.3)';
           }
         
           const roi = chartData[ctx.dataIndex]?.roi ?? 0;

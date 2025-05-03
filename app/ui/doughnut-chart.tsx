@@ -14,18 +14,26 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default function DoughnutChart({
   recommendations
 }: {
-  recommendations: RecommendationData
+  recommendations?: RecommendationData
 }) {
+  const dataArr = recommendations ? recommendations : {
+    strongBuy: 0,
+    buy: 0,
+    hold: 1,
+    sell: 0,
+    strongSell: 0
+  };
+
   const data = {
-    labels: ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell'],
+    labels: ['Strong Buy', 'Buy', recommendations === undefined ? 'No Data Available' : 'Hold', 'Sell', 'Strong Sell'],
     datasets: [
       {
         data: [
-          recommendations.strongBuy, 
-          recommendations.buy, 
-          recommendations.hold, 
-          recommendations.sell, 
-          recommendations.strongSell
+          dataArr.strongBuy, 
+          dataArr.buy, 
+          dataArr.hold, 
+          dataArr.sell, 
+          dataArr.strongSell
         ],
         backgroundColor: [
           'oklch(84.5% 0.143 164.978 / 1)', 
