@@ -1,55 +1,24 @@
 'use client';
 
 import { Panel } from '@/app/ui/panel';
-import { getDailyAggregates } from '@/app/lib/polygon-service';
-import { getBasicFinancials, getRecommendations } from '@/app/lib/finn-hub-service';
 import DailyAggregateChart from '@/app/ui/daily-aggregate-chart';
 import MonthlyAggregateChart from '@/app/ui/monthly-aggregate-chart';
 import FinancialOverviewPanel from '@/app/ui/financial-overview-panel';
 import RiskGrowthPanel from '@/app/ui/risk-growth-panel';
 import RecommendationsChart from '@/app/ui/recommendations-chart';
-import { useState, useEffect } from 'react';
-import { showErrorToast } from '@/app/lib/toast-utils';
+import { DailyData, CompanyMetricsData, RecommendationData } from "@/app/lib/definitions";
 
 export default function DashboardContent({ 
-  selectedStock 
+  selectedStock,
+  polygonData,
+  companyMetrics,
+  recommendations
 }: { 
-  selectedStock: string 
+  selectedStock: string;
+  polygonData?: DailyData[]; 
+  companyMetrics?: CompanyMetricsData;
+  recommendations?: RecommendationData;
 }) {
-  const [polygonData, setPolygonData] = useState([]);
-  const [companyMetrics, setCompanyMetrics] = useState(null);
-  const [recommendations, setRecommendations] = useState([]);
-
-  /**
-   * Retrieves all the necessary stock data from Polygon and
-   * FinnHub. The selectedStock variable is received as:
-   * 'symbol\\name'.
-   */
-  useEffect(() => {
-    let stockSymbol = selectedStock.split('\\')[0];
-
-    const fetchData = async () => {
-      let agg = null;
-    
-      try {
-        agg = await getDailyAggregates(stockSymbol);
-      } catch (error) {
-        showErrorToast("Stock data is currently limited to 5 pulls a minute. Please wait a minute before attempting again.")  
-      }
-    
-      const [metrics, recs] = await Promise.all([
-        getBasicFinancials(stockSymbol),
-        getRecommendations(stockSymbol),
-      ]);
-    
-      setPolygonData(agg);
-      setCompanyMetrics(metrics);
-      setRecommendations(recs);
-    };
-
-    fetchData();
-  }, [selectedStock]);
-
   return (
     <main className="2xl:px-4 3xl:px-20 4xl:px-54">
       <h1 className="mb-4 font-extrabold text-2xl md:text-3xl">Overview</h1>

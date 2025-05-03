@@ -2,12 +2,16 @@ import LineChart from "@/app/ui/line-chart";
 import { ArrowUpRightIcon, ArrowDownRightIcon } from "@heroicons/react/24/outline";
 import { getYearlyChange, getPercentChange } from "@/app/lib/polygon-utils";
 import { DailyData } from "@/app/lib/definitions";
+import { DailyAggregateChartSkeleton } from "@/app/ui/skeletons";
 
 export default function DailyAggregateChart({
   data
 }: {
-  data: DailyData[]
+  data?: DailyData[]
 }) {
+  if (data === undefined)
+    return <DailyAggregateChartSkeleton />;
+
   const yearlyChange = getYearlyChange(data);
   const percentChange = getPercentChange(data);
   const positive = percentChange >= 0;
@@ -34,10 +38,7 @@ export default function DailyAggregateChart({
       </div>
 
       <div className="2xl:h-[450px]">
-        <LineChart 
-          data={data}
-          positive={positive}
-        />
+        <LineChart data={data} positive={positive} />
       </div>
 
     </div>

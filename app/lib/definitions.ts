@@ -1,3 +1,20 @@
+export type CompanyMetrics = {
+  marketCapitalization: number;
+  '52WeekHigh': number;
+  '52WeekLow': number;
+  peNormalizedAnnual: number;
+  pbAnnual: number;
+  revenueGrowth3Y: number;
+  revenueGrowth5Y: number;
+  roi5Y: number;
+  'longTermDebt/equityAnnual': number;
+  'longTermDebt/equityQuarterly': number;
+};
+
+export type CompanyMetricsData = {
+  metrics: CompanyMetrics;
+}
+
 export type DailyData = {
   t: number;
   o: number;

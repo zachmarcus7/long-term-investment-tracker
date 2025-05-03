@@ -50,3 +50,13 @@ input::placeholder {
   height: 1.5rem;
   animation: spin 1s linear infinite;
 }
+
+.shimmer {  
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

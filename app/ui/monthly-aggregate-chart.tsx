@@ -6,9 +6,12 @@ export default function MonthlyAggregateChart({
   data,
   selectedTicker
 }: {
-  data: DailyData[];
+  data?: DailyData[];
   selectedTicker: string;
 }) {
+  if (data === undefined)
+    return <p>undefined</p>;
+
   const monthlyData = aggregateToMonthly(data);
   const roiData = calculateMonthlyROI(monthlyData);
   const avgData = calculateAverageMonthlyROI(roiData);
