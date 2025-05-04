@@ -7,6 +7,7 @@ import FinancialOverviewPanel from '@/app/ui/financial-overview-panel';
 import RiskGrowthPanel from '@/app/ui/risk-growth-panel';
 import RecommendationsChart from '@/app/ui/recommendations-chart';
 import { DailyData, CompanyMetricsData, RecommendationData } from "@/app/lib/definitions";
+import { DailyAggregateChartSkeleton, MonthlyAggregateChartSkeleton, OverviewPanelSkeleton, RecommendationsChartSkeleton } from '@/app/ui/skeletons';
 
 export default function DashboardContent({ 
   selectedStock,
@@ -31,26 +32,45 @@ export default function DashboardContent({
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 xl:grid-cols-9">
         <div className="col-span-1 md:col-span-3 xl:col-span-6">
           <Panel title="Stock Price (Past 2 Years)">
-            <DailyAggregateChart data={polygonData} />
+            {polygonData
+              ? <DailyAggregateChart data={polygonData} />
+              : <DailyAggregateChartSkeleton />
+            }
           </Panel>
         </div>
 
         <div className="col-span-1 xl:col-span-3">
           <Panel title="Return On Investment">
-            <MonthlyAggregateChart data={polygonData} selectedTicker={selectedStock.split('\\')[0]} />
+            {polygonData
+              ? <MonthlyAggregateChart data={polygonData} selectedTicker={selectedStock.split('\\')[0]} />
+              : <MonthlyAggregateChartSkeleton />
+            }
           </Panel>
         </div>
       </div>
 
       {/* Bottom Row */}
       <div className="mt-6 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        <FinancialOverviewPanel data={companyMetrics} />
-        <RiskGrowthPanel data={companyMetrics} />
+
+        {companyMetrics
+          ? <FinancialOverviewPanel data={companyMetrics} /> 
+          : <OverviewPanelSkeleton />
+        }
+
+        {companyMetrics
+          ? <RiskGrowthPanel data={companyMetrics} />
+          : <OverviewPanelSkeleton />
+        }
+
         <div className="lg:col-span-2 h-full">
           <Panel title="Current Recommendations">
-            <RecommendationsChart recommendations={recommendations} />
+            {recommendations
+              ? <RecommendationsChart recommendations={recommendations} />
+              : <RecommendationsChartSkeleton />
+            }
           </Panel>
         </div>
+
       </div>
     </main>
   );

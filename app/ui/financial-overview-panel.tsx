@@ -1,5 +1,4 @@
 import { Panel } from "@/app/ui/panel";
-import { OverviewPanelSkeleton } from "@/app/ui/skeletons";
 import { formatMarketCap } from "@/app/lib/finn-hub-utils";
 
 export default function FinancialOverviewPanel({
@@ -7,9 +6,6 @@ export default function FinancialOverviewPanel({
 }: {
   data?: any
 }) {
-  if (data === undefined)
-    return <OverviewPanelSkeleton />
-
   return (
     <Panel title="Financial Overview">
       <div className="flex w-full justify-between mb-2">

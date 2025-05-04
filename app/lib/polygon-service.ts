@@ -11,7 +11,13 @@ export async function getDailyAggregates(ticker: string = "AAPL") {
   const end = now.toISOString().split('T')[0];
   const start = new Date(now.setFullYear(now.getFullYear() - 2)).toISOString().split('T')[0];
 
-  const res = await fetch(`${BASE_URL}/aggs/ticker/${ticker}/range/1/day/${start}/${end}?adjusted=true&sort=asc&apiKey=${API_KEY}`);
+  const res = await fetch(
+    `${BASE_URL}/aggs/ticker/${ticker}/range/1/day/${start}/${end}?adjusted=true&sort=asc&apiKey=${API_KEY}`,
+    {
+      // cache for 24 hours
+      next: { revalidate: 60 * 60 * 24 }
+    }
+  );
 
   if (!res.ok) {
     throw new Error(`Failed to fetch stock data for ${ticker}`);
@@ -19,20 +25,4 @@ export async function getDailyAggregates(ticker: string = "AAPL") {
 
   const json = await res.json();
   return json.results || [];
-}
-
-/**
- * 
- * @param ticker 
- * @returns 
- */
-export async function getCompanyProfile(ticker: string = "AAPL") {
-  const res = await fetch(`${BASE_URL}/reference/tickers/${ticker}?apiKey=${API_KEY}`);
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch profile for ${ticker}`);
-  }
-
-  const json = await res.json();
-  return json.results || {};
 }

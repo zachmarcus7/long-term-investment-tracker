@@ -12,15 +12,15 @@ export default function LineChart({
   data,
   positive
 }: {
-  data: StockDataPoint[];
+  data?: StockDataPoint[];
   positive: boolean
 }) {
   const chartData = {
-    labels: data.map(point => new Date(point.t)),
+    labels: data?.map(point => new Date(point.t)),
     datasets: [
       {
         label: 'Price',
-        data: data.map(point => point.c),
+        data: data?.map(point => point.c),
         borderColor: positive ? 'oklch(69.6% 0.17 162.48)' : 'oklch(0.67 0.18 21.29)',
         borderWidth: 1.5,
         fill: true,

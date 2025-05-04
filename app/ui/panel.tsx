@@ -10,7 +10,7 @@ export function Panel({
   heightFull?: boolean;
 }) {
   return (
-    <div className={`rounded-4xl p-2 bg-white shadow-smooth relative lg:p-3 2xl:p-4 h-full`}>
+    <div className={`rounded-4xl p-2 bg-white shadow-smooth relative lg:p-3 2xl:p-4 h-full overflow-hidden`}>
 
       {/* Header */}
       <div className="flex p-2 lg:p-4">

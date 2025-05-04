@@ -1,10 +1,6 @@
 import { Panel } from "@/app/ui/panel";
-import { OverviewPanelSkeleton } from "@/app/ui/skeletons";
 
 export default function RiskGrowthPanel({data}: {data: any}) {
-  if (data === null)
-    return <OverviewPanelSkeleton />
-
   return (
     <Panel title="Risk & Growth">
       <div className="flex w-full justify-between mb-2">

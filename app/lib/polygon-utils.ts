@@ -5,7 +5,10 @@ import { DailyData, MonthlyData, Revenue, RoiData } from '@/app/lib/definitions'
  * @param dailyData 
  * @returns 
  */
-export function aggregateToMonthly(dailyData: DailyData[]): MonthlyData[] {
+export function aggregateToMonthly(dailyData?: DailyData[]): MonthlyData[] {
+  if (dailyData === undefined)
+    return [];
+
   const grouped: Record<string, DailyData[]> = {};
 
   for (const day of dailyData) {
@@ -94,10 +97,13 @@ export const generateYAxis = (revenue: Revenue[]) => {
  * @param data 
  * @returns 
  */
-export function getYearlyChange(data: DailyData[]): number {
-  if (data.length === 0 || data.length === 1) {
+export function getYearlyChange(data?: DailyData[]): number {
+  if (data === undefined)
     return 0;
-  }
+
+  if (data.length === 0 || data.length === 1) 
+    return 0;
+  
   return Number((data[data.length - 1].c - data[0].c).toFixed(2));
 }
 
@@ -106,9 +112,12 @@ export function getYearlyChange(data: DailyData[]): number {
  * @param data 
  * @returns 
  */
-export function getPercentChange(data: DailyData[]): number {
-  if (data.length === 0 || data.length === 1) {
+export function getPercentChange(data?: DailyData[]): number {
+  if (data === undefined)
     return 0;
-  }
+
+  if (data.length === 0 || data.length === 1) 
+    return 0;
+  
   return Number((((data[data.length - 1].c - data[0].c)/data[0].c) * 100).toFixed(2));
 }

@@ -1,6 +1,7 @@
 import { aggregateToMonthly, calculateMonthlyROI, calculateAverageMonthlyROI } from '@/app/lib/polygon-utils';
 import BarChart from '@/app/ui/bar-chart';
 import { DailyData } from '@/app/lib/definitions';
+import { MonthlyAggregateChartSkeleton } from './skeletons';
 
 export default function MonthlyAggregateChart({
   data,
@@ -9,9 +10,6 @@ export default function MonthlyAggregateChart({
   data?: DailyData[];
   selectedTicker: string;
 }) {
-  if (data === undefined)
-    return <p>undefined</p>;
-
   const monthlyData = aggregateToMonthly(data);
   const roiData = calculateMonthlyROI(monthlyData);
   const avgData = calculateAverageMonthlyROI(roiData);
