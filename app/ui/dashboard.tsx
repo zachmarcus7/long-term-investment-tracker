@@ -14,49 +14,45 @@ export default function Dashboard() {
   const [companyMetrics, setCompanyMetrics] = useState<CompanyMetricsData | undefined>(undefined);
   const [recommendations, setRecommendations] = useState<RecommendationData[] | undefined>(undefined);
   
-  /**
-   * Event handler for when a new stock is selected from the 
-   * sidenav.
-   * @param stock - Stock data string formatted as 'symbol\\name'.
-   */
-  const handleStockChange = (stock: string) => {
-    setSelectedStock(stock);
-  }
-
-  /**
-   * Retrieves all the necessary stock data from Polygon and
-   * FinnHub.
-   */
   useEffect(() => {
-    let stockSymbol = selectedStock.split('\\')[0];
+    handleStockChange("AAPL\\APPLE INC");
+  }, []);
 
-    const fetchData = async () => {
-      let agg = null;
-    
-      try {
-        agg = await getDailyAggregates(stockSymbol);
-      } catch (error) {
-        showErrorToast("Stock data is currently limited to 5 retrievals per minute. Please wait a minute before attempting again.");
-        
-        // TODO: disable side nav for 1 minute
-      }
-    
-      const [metrics, recs] = await Promise.all([
-        getBasicFinancials(stockSymbol),
-        getRecommendations(stockSymbol),
-      ]);
-    
-      setPolygonData(agg);
-      setCompanyMetrics(metrics);
-      setRecommendations(recs);
-    };
+  const handleStockChange = async (stock: string) => {
+    if (stock === selectedStock) {
+      return;
+    }
 
-    fetchData();
-  }, [selectedStock]);
+    const prevStock = selectedStock;
+    setSelectedStock(stock);
+    setPolygonData(undefined);
+    setCompanyMetrics(undefined);
+    setRecommendations(undefined);
+    const stockSymbol = stock.split('\\')[0];
+
+    try {
+      await fetchStockData(stockSymbol);
+    } catch (error) {
+      console.log("Failed to fetch stock data", error);
+      showErrorToast("Stock data retrieval is currently capped at 5 requests per minute. Please wait a moment before trying again.");
+      setSelectedStock(prevStock);
+    }
+  };
+
+  const fetchStockData = async (stockSymbol: string) => {
+    const [aggregates, metrics, recs] = await Promise.all([
+      getDailyAggregates(stockSymbol),
+      getBasicFinancials(stockSymbol),
+      getRecommendations(stockSymbol),
+    ]);
+    
+    setPolygonData(aggregates);
+    setCompanyMetrics(metrics);
+    setRecommendations(recs);
+  };
 
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-
       <div className="w-full flex-none md:w-48 2xl:w-66 3xl:w-76 bg-nav">
         <SideNav onStockChange={handleStockChange} selectedStock={selectedStock} />
       </div>
@@ -69,7 +65,6 @@ export default function Dashboard() {
           recommendations={recommendations ? recommendations[0] : undefined}
         />
       </div>
-
     </div>
   );
 }
