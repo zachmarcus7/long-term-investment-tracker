@@ -1,8 +1,8 @@
 import toast from 'react-hot-toast';
 
 /**
- * 
- * @param message 
+ * Shows a success toast in center top of app.
+ * @param message - Message to display in toast body.
  */
 export function showSuccessToast(message: string) {
   toast.success(
@@ -26,8 +26,8 @@ export function showSuccessToast(message: string) {
 }
 
 /**
- * 
- * @param message 
+ * Shows an error toast in center top of app.
+ * @param message - Message to display in toast body.
  */
 export function showErrorToast(message: string) {
   toast.error(

@@ -1,13 +1,9 @@
-import { JSX } from 'react';
-
 export function Panel({
   children,
-  title,
-  heightFull = false
+  title
 }: {
-  children: React.ReactNode | Promise<JSX.Element>;
+  children: React.ReactNode;
   title: string;
-  heightFull?: boolean;
 }) {
   return (
     <div className={`rounded-4xl p-2 bg-white shadow-smooth relative lg:p-3 2xl:p-4 h-full overflow-hidden`}>

@@ -9,6 +9,7 @@ import {
   Tooltip,
   Title,
   ScriptableContext,
+  TooltipItem,
 } from 'chart.js';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Title);
@@ -54,9 +55,7 @@ export default function BarChart({
     maintainAspectRatio: false,
     plugins: {
       tooltip: {
-        callbacks: {
-          label: (ctx: any) => `${ctx.parsed.y.toFixed(2)}%`
-        }
+        callbacks: { label: (ctx: TooltipItem<'bar'>) => `${ctx.parsed.y.toFixed(2)}%` }
       },
       legend: { display: false },
       title: { display: false }
@@ -64,9 +63,7 @@ export default function BarChart({
     scales: {
       y: {
         ticks: {
-          callback: function (val: any) {
-            return `${val}%`;
-          },
+          callback: function (val: string | number) { return `${val}%` },
           color: 'oklch(0.76 0.04 269.54)'
         },
         grid: { 
@@ -80,9 +77,7 @@ export default function BarChart({
         ticks: { 
           color: 'oklch(0.76 0.04 269.54)',
           maxTicksLimit: 6,
-          callback: function(value: any) {
-            return chartData[value].label.split(" ")[0];
-          }
+          callback: function(value: number | string) { return chartData[Number(value)].label.split(" ")[0] }
         },
         grid: { display: false }
       }

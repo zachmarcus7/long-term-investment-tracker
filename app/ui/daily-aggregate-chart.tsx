@@ -33,7 +33,7 @@ export default function DailyAggregateChart({
 
       </div>
 
-      <div className="2xl:h-[450px]">
+      <div className="2xl:h-[350px] 3xl:h-[400px] 4xl:h-[450px]">
         <LineChart data={data} positive={positive} />
       </div>
 

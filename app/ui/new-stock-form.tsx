@@ -19,7 +19,8 @@ export default function NewStockForm({
   const [query, setQuery] = useState('');
 
   /**
-   * 
+   * Filters the list of stock symbols based on the current search query.
+   * It matches the query against both the symbol and the description fields.
    */
   const filteredStocks = useMemo(() => {
     const lower = query.toLowerCase();
@@ -33,9 +34,12 @@ export default function NewStockForm({
   }, [query, data]);
 
   /**
+   * A single row renderer for the virtualized list of filtered stock options.
+   * Used in conjunction with react-window to efficiently render only the visible rows 
+   * in the headless UI dropdown.
    * 
-   * @param param0 
-   * @returns 
+   * @param param0 - Props containing the current row index and computed style.
+   * @returns - JSX for a selectable stock option.
    */
   const Row = ({ index, style }: { index: number; style: React.CSSProperties }) => {
     const stock = filteredStocks[index];

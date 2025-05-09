@@ -1,49 +1,54 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from "react";
-import PrimaryButton from "@/app/ui/primary-button";
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import Image from "next/image";
+import { capitalizeFirstLetter } from "@/app/lib/utils";
 import Dialog from "@/app/ui/dialog";
-import NewStockForm from "@/app/ui/new-stock-form";
 import { getStockSymbols } from "@/app/lib/finn-hub-service";
-import { trackNewStock, retrieveTrackedStocks } from '@/app/lib/local-storage-service';
+import NewStockForm from "@/app/ui/new-stock-form";
+import PrimaryButton from "@/app/ui/primary-button";
 import { showSuccessToast, showErrorToast } from '@/app/lib/toast-utils';
 import { StockSymbol } from '@/app/lib/definitions';
+import { trackNewStock, retrieveTrackedStocks } from '@/app/lib/local-storage-service';
 
-export default function SideNav({
-  onStockChange,
-  selectedStock
-}: {
-  onStockChange: (symbol: string) => void,
-  selectedStock: string
-}) {
+export default function SideNav() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const segments = pathname.split('/');
+  const currentStock = segments[2];
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [stockSymbols, setStockSymbols] = useState([]);
+  const [stockSymbols, setStockSymbols] = useState<StockSymbol[]>([]);
   const [pendingAdd, setPendingAdd] = useState(false);
-  const [trackedStocks, setTrackedStocks] = useState([]);
+  const [trackedStocks, setTrackedStocks] = useState<string[]>([]);
 
   /**
-   * This is for retrieving all available stock symbols data from the
-   * FinnHub API.
+   * Sets available stock symbols on initial render.
    */
   useEffect(() => {
+    const fetchTrackedStocks = retrieveTrackedStocks();
+    setTrackedStocks(fetchTrackedStocks);
+
     const fetchData = async () => {
       const symbols = await getStockSymbols();
       setStockSymbols(symbols);
     };
+    
     fetchData();
   }, []);
 
   /**
    * 
+   * @param symbol 
    */
-  useEffect(() => {
-    const trackedStocks = retrieveTrackedStocks();
-    setTrackedStocks(trackedStocks);
-  }, []);
+  const handleStockChange = (symbol: string) => {
+    router.push(`/stock/${symbol.split('\\')[0]}`);
+  }
 
   /**
-   * 
-   * @param selectedStock 
+   * Handles form submission for new stock tracking.
+   * @param selectedStock - Stock object containing new stock data.
    */
   const handleStockSubmit = async (selectedStock: StockSymbol) => {
     setPendingAdd(true);
@@ -51,34 +56,29 @@ export default function SideNav({
 
     if (result === true) {
       showSuccessToast("Stock successfully added");
-      const trackedStocks = retrieveTrackedStocks();
-      setTrackedStocks(trackedStocks);
+      const updatedTrackedStocks = retrieveTrackedStocks();
+      setTrackedStocks(updatedTrackedStocks);
       setIsDialogOpen(false);
     } else if (result === false) {
-      showErrorToast("Stock already being tracked")
+      showErrorToast("Stock already being tracked");
     } else if (result === null) {
-      showErrorToast("An error has occurred. Please try again.")
+      showErrorToast("An error has occurred. Please try again.");
     }
 
     setPendingAdd(false);
   };
 
-  /**
-   * 
-   * @param word 
-   * @returns 
-   */
-  const capitalizeFirstLetter = (word: string) => {
-    if (!word) return word; 
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-  }
-
   return (
-    <>
+    <div className="w-full flex-none md:w-48 2xl:w-66 3xl:w-76 bg-nav">
 
       {/* Top Level */}
       <div className="w-full flex items-center justify-center pr-4 pt-10 pb-8">
-        <img src="/logo.svg" alt="App Logo" />
+        <Image 
+          src="/logo.svg" 
+          alt="App Logo"
+          width={25}
+          height={25}
+        />
         <h5 className="text-white font-bold pl-2 font-hb">long term track</h5>
       </div>
 
@@ -87,7 +87,7 @@ export default function SideNav({
         <PrimaryButton
           text="Track New Stock"
           showPlusIcon={true}
-          onClick={() => {setIsDialogOpen(true)}}
+          onClick={() => { setIsDialogOpen(true); }}
         />
       </div>
 
@@ -96,10 +96,10 @@ export default function SideNav({
 
       <ul className="w-full mb-4">
         {trackedStocks.map((stock: string, index: number) => (
-          <li 
-            key={index} 
-            className={`flex items-center py-2 cursor-pointer pl-4 transition-all ease ${stock === selectedStock ? 'border-l-4 border-l-emerald-400 bg-white/10 w-full' : 'hover:bg-white/5'}`}
-            onClick={() => {onStockChange(stock)}}
+          <li
+            key={index}
+            className={`flex items-center py-2 cursor-pointer pl-4 transition-all ease ${stock.split('\\')[0] === currentStock ? 'border-l-4 border-l-emerald-400 bg-white/10 w-full' : 'hover:bg-white/5'}`}
+            onClick={() => { handleStockChange(stock); }}
           >
             <div className="w-16">
               <p className="text-xs text-zinc-200">{stock.split('\\')[0]}</p>
@@ -107,22 +107,21 @@ export default function SideNav({
             <p className="text-white text-base">{capitalizeFirstLetter(stock.split('\\')[1].split(' ')[0])}</p>
           </li>
         ))}
-      </ul> 
+      </ul>
 
       {/* Dialog for adding stock tickers */}
-      <Dialog 
-        isOpen={isDialogOpen} 
-        onOpen={() => {}}
-        onClose={() => {setIsDialogOpen(false)}}
+      <Dialog
+        isOpen={isDialogOpen}
+        onClose={() => { setIsDialogOpen(false); }}
         title="Track New Stock"
       >
-        <NewStockForm 
+        <NewStockForm
           data={stockSymbols}
           onNewStockSubmit={handleStockSubmit}
           pendingAdd={pendingAdd}
         />
       </Dialog>
 
-    </>
+    </div>
   );
 }

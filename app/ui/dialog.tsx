@@ -5,13 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Dialog({
   isOpen = false,
-  onOpen,
   onClose,
   title,
   children,
 }: {
   isOpen: boolean;
-  onOpen: () => void;
   onClose: () => void;
   title: string;
   children: React.ReactNode;

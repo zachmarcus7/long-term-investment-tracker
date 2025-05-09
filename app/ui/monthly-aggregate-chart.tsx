@@ -1,14 +1,13 @@
 import { aggregateToMonthly, calculateMonthlyROI, calculateAverageMonthlyROI } from '@/app/lib/polygon-utils';
 import BarChart from '@/app/ui/bar-chart';
 import { DailyData } from '@/app/lib/definitions';
-import { MonthlyAggregateChartSkeleton } from './skeletons';
 
 export default function MonthlyAggregateChart({
   data,
   selectedTicker
 }: {
   data?: DailyData[];
-  selectedTicker: string;
+  selectedTicker?: string;
 }) {
   const monthlyData = aggregateToMonthly(data);
   const roiData = calculateMonthlyROI(monthlyData);

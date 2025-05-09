@@ -1,7 +1,5 @@
-import Dashboard from "@/app/ui/dashboard";
-
-export default async function Page() {
+export default function Page() {
   return (
-    <Dashboard />
-  );
+    <p></p>
+  )
 }

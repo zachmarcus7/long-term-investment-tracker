@@ -17,7 +17,7 @@ export async function trackNewStock(symbol: string, description: string): Promis
     
     trackedStocks.push(`${symbol}\\${description}`);
     localStorage.setItem('trackedStocks', JSON.stringify(trackedStocks));
-
+    
     return true;
   } catch (err) {
     console.error("LocalStorage error:", err);
@@ -26,12 +26,12 @@ export async function trackNewStock(symbol: string, description: string): Promis
 }
 
 /**
- * 
+ * Retrieves currently tracked stocks from user's local storage.
+ * 'AAPL' is always included as a default.
  */
 export function retrieveTrackedStocks() {
   let trackedStocks = JSON.parse(localStorage.getItem('trackedStocks') || '[]');
 
-  // always include AAPL as a default
   if (!trackedStocks.includes("AAPL\\APPLE INC"))
     trackedStocks = ["AAPL\\APPLE INC", ...trackedStocks];
 

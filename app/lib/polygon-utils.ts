@@ -1,9 +1,10 @@
 import { DailyData, MonthlyData, Revenue, RoiData } from '@/app/lib/definitions';
 
 /**
- * 
- * @param dailyData 
- * @returns 
+ * Aggregates daily stock data into monthly data.
+ *
+ * @param dailyData - Array of daily stock data points.
+ * @returns - An array of aggregated monthly data.
  */
 export function aggregateToMonthly(dailyData?: DailyData[]): MonthlyData[] {
   if (dailyData === undefined)
@@ -30,18 +31,18 @@ export function aggregateToMonthly(dailyData?: DailyData[]): MonthlyData[] {
     const high = Math.max(...days.map(d => d.h));
     const low = Math.min(...days.map(d => d.l));
     const volume = days.reduce((sum, d) => sum + d.v, 0);
-
     result.push({ month, o: open, h: high, l: low, c: close, v: volume });
   }
 
-  // Sort months chronologically
+  // sort months chronologically
   return result.sort((a, b) => new Date(a.month).getTime() - new Date(b.month).getTime());
 }
 
 /**
- * 
- * @param data 
- * @returns 
+ * Calculates the month-over-month return on investment (ROI) from monthly data.
+ *
+ * @param data - Array of monthly data points.
+ * @returns - An array of ROI data with month labels.
  */
 export function calculateMonthlyROI(data: MonthlyData[]) {
   const roiData = [];
@@ -61,9 +62,10 @@ export function calculateMonthlyROI(data: MonthlyData[]) {
 }
 
 /**
- * 
- * @param data 
- * @returns 
+ * Calculates the average of all monthly ROI values.
+ *
+ * @param data - Array of ROI data points.
+ * @returns - The average ROI value rounded to 2 decimals.
  */
 export function calculateAverageMonthlyROI(data: RoiData[]) {
   if (data.length === 0) 
@@ -74,9 +76,10 @@ export function calculateAverageMonthlyROI(data: RoiData[]) {
 }
 
 /**
- * 
- * @param revenue 
- * @returns 
+ * Generates Y-axis labels for a revenue chart.
+ *
+ * @param revenue - Array of revenue data points.
+ * @returns - An object containing Y-axis labels and the top label value.
  */
 export const generateYAxis = (revenue: Revenue[]) => {
   // Calculate what labels we need to display on the y-axis
@@ -93,9 +96,10 @@ export const generateYAxis = (revenue: Revenue[]) => {
 };
 
 /**
- * 
- * @param data 
- * @returns 
+ * Calculates the raw price change over the provided daily data range.
+ *
+ * @param data - Array of daily stock data points.
+ * @returns - The absolute price difference from first to last day.
  */
 export function getYearlyChange(data?: DailyData[]): number {
   if (data === undefined)
@@ -108,9 +112,10 @@ export function getYearlyChange(data?: DailyData[]): number {
 }
 
 /**
- * 
- * @param data 
- * @returns 
+ * Calculates the percentage change over the provided daily data range.
+ *
+ * @param data - Array of daily stock data points.
+ * @returns - The percentage price change from first to last day.
  */
 export function getPercentChange(data?: DailyData[]): number {
   if (data === undefined)

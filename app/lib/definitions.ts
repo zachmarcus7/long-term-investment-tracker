@@ -12,7 +12,7 @@ export type CompanyMetrics = {
 };
 
 export type CompanyMetricsData = {
-  metrics: CompanyMetrics;
+  metric: CompanyMetrics;
 }
 
 export type DailyData = {
@@ -44,6 +44,16 @@ export type MonthlyData = {
   v: number;
 };
 
+export type RecommendationData = {
+  buy: number;
+  hold: number;
+  period: string;
+  sell: number;
+  strongBuy: number;
+  strongSell: number;
+  symbol: string;
+}
+
 export type Revenue = {
   month: string;
   revenue: number;
@@ -70,14 +80,4 @@ export type StockSymbol = {
   symbol: string;
   symbol2: string;
   type: string;
-}
-
-export type RecommendationData = {
-  buy: number;
-  hold: number;
-  period: string;
-  sell: number;
-  strongBuy: number;
-  strongSell: number;
-  symbol: string;
 }
