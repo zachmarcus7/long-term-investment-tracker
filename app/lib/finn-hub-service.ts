@@ -1,7 +1,7 @@
 import { CompanyMetricsData, RecommendationData, StockSymbol } from "@/app/lib/definitions";
 
-const BASE_URL =`https://finnhub.io/api/v1`;
-const API_KEY = "cvsk6q9r01qhup0raco0cvsk6q9r01qhup0racog";
+const BASE_URL = process.env.FINNHUB_API_BASE_URL;
+const API_KEY = process.env.FINNHUB_API_KEY;
 
 /**
  * Retrieves company basic financials such as margin, P/E ratio, 52-week high/low etc. Defaults to "AAPL".

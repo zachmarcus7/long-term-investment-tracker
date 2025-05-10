@@ -7,8 +7,8 @@ export default async function DashboardTopPanels({ stockSymbol }: { stockSymbol:
   const polygonData = await getDailyAggregates(stockSymbol);
 
   return (
-    <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 xl:grid-cols-9">
-      <div className="col-span-1 md:col-span-3 xl:col-span-6">
+    <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-9">
+      <div className="col-span-1 xl:col-span-6">
         <Panel title="Stock Price (Past 2 Years)">
           <DailyAggregateChart data={polygonData} />
         </Panel>

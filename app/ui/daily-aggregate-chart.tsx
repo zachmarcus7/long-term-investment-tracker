@@ -15,10 +15,10 @@ export default function DailyAggregateChart({
   return (
     <div className="h-full flex flex-col justify-between">
 
-      <div className="w-full flex items-end justify-between pb-2 lg:pb-3 lg:pl-4 lg:pr-2">
+      <div className="w-full flex items-end justify-between pb-2 lg:pb-3 2xl:pl-4 2xl:pr-2">
 
         <div className="flex items-end gap-2">
-          <h2 className={`text-xl lg:text-4xl 2xl:text-5xl font-bold ${positive ? 'text-emerald-500' : 'text-reddish-500'}`}>
+          <h2 className={`text-xl font-bold lg:text-4xl 2xl:text-5xl ${positive ? 'text-emerald-500' : 'text-reddish-500'}`}>
             {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(yearlyChange)}
           </h2>
           {positive
@@ -33,7 +33,7 @@ export default function DailyAggregateChart({
 
       </div>
 
-      <div className="2xl:h-[350px] 3xl:h-[400px] 4xl:h-[450px]">
+      <div className="lg:h-[280px] 2xl:h-[300px] 3xl:h-[400px] 4xl:h-[450px]">
         <LineChart data={data} positive={positive} />
       </div>
 

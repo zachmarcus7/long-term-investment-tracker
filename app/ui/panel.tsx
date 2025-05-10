@@ -6,7 +6,7 @@ export function Panel({
   title: string;
 }) {
   return (
-    <div className={`rounded-4xl p-2 bg-white shadow-smooth relative lg:p-3 2xl:p-4 h-full overflow-hidden`}>
+    <div className={`rounded-4xl p-4 bg-white shadow-smooth relative h-full overflow-hidden`}>
 
       {/* Header */}
       <div className="flex p-2 lg:p-4">
@@ -14,7 +14,7 @@ export function Panel({
       </div>
 
       {/* Body */}
-      <div className={`p-2 lg:p-4 lg:h-[90%]`}>
+      <div className={`p-2 lg:p-4 h-[90%]`}>
         {children}
       </div>
 

@@ -58,7 +58,7 @@ export default function DoughnutChart({
   }
 
   return (
-    <div className="max-h-[215px] ml-[6rem] lg:absolute lg:top-[2rem] w-full flex justify-center items-center">
+    <div className="w-full flex justify-center items-center max-h-[175px] max-md:mt-6 md:ml-[6rem] md:absolute md:top-[1.5rem] lg:top-[3rem] 2xl:top-[2rem] 2xl:max-h-[215px]">
       <Doughnut data={data} options={options} />
     </div>
   );

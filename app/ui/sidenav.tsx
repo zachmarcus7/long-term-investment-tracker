@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Image from "next/image";
-import { capitalizeFirstLetter } from "@/app/lib/utils";
+import { useState, useEffect } from "react";
+import { usePathname, useRouter } from 'next/navigation';
 import Dialog from "@/app/ui/dialog";
-import { getStockSymbols } from "@/app/lib/finn-hub-service";
+import { formatStockName } from "@/app/lib/utils";
 import NewStockForm from "@/app/ui/new-stock-form";
 import PrimaryButton from "@/app/ui/primary-button";
 import { showSuccessToast, showErrorToast } from '@/app/lib/toast-utils';
@@ -27,20 +26,24 @@ export default function SideNav() {
    * Sets available stock symbols on initial render.
    */
   useEffect(() => {
-    const fetchTrackedStocks = retrieveTrackedStocks();
-    setTrackedStocks(fetchTrackedStocks);
+    setTrackedStocks(retrieveTrackedStocks());
 
     const fetchData = async () => {
-      const symbols = await getStockSymbols();
-      setStockSymbols(symbols);
+      try {
+        const res = await fetch('/api/stock-symbols');
+        const data = await res.json();
+        setStockSymbols(data);
+      } catch (err) {
+        console.error('Failed to fetch stock symbols:', err);
+      }
     };
-    
+
     fetchData();
   }, []);
 
   /**
-   * 
-   * @param symbol 
+   * Sets current selected stock to passed symbol.
+   * @param symbol - Stock info formatted as 'symbol\\name'
    */
   const handleStockChange = (symbol: string) => {
     router.push(`/stock/${symbol.split('\\')[0]}`);
@@ -69,7 +72,7 @@ export default function SideNav() {
   };
 
   return (
-    <div className="w-full flex-none md:w-48 2xl:w-66 3xl:w-76 bg-nav">
+    <div className="w-full flex-none md:w-56 3xl:w-76 bg-nav">
 
       {/* Top Level */}
       <div className="w-full flex items-center justify-center pr-4 pt-10 pb-8">
@@ -101,10 +104,10 @@ export default function SideNav() {
             className={`flex items-center py-2 cursor-pointer pl-4 transition-all ease ${stock.split('\\')[0] === currentStock ? 'border-l-4 border-l-emerald-400 bg-white/10 w-full' : 'hover:bg-white/5'}`}
             onClick={() => { handleStockChange(stock); }}
           >
-            <div className="w-16">
+            <div className="w-14 3xl:w-16">
               <p className="text-xs text-zinc-200">{stock.split('\\')[0]}</p>
             </div>
-            <p className="text-white text-base">{capitalizeFirstLetter(stock.split('\\')[1].split(' ')[0])}</p>
+            <p className="text-white text-base">{formatStockName(stock.split('\\')[1])}</p>
           </li>
         ))}
       </ul>

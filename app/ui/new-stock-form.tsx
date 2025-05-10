@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { FixedSizeList as List } from 'react-window';
 import PrimaryButton from "@/app/ui/primary-button";
 import { StockSymbol } from '@/app/lib/definitions';
@@ -61,13 +62,18 @@ export default function NewStockForm({
 
         <Combobox value={selectedStock} onChange={setSelectedStock} onClose={() => setQuery('')}>
 
+        <div className="flex items-center bg-greyish-300/15 rounded">
+          <span className="pl-3 text-greyish-400">
+            <MagnifyingGlassIcon height={15} width={15} />
+          </span>
           <ComboboxInput
             aria-label="Stock Symbol"
             displayValue={(stock: StockSymbol) => stock?.symbol}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full p-2 rounded placeholder-greyish-300 bg-greyish-300/15 focus:outline-none text-blueish-600"
+            className="w-full p-2 pl-2 rounded bg-transparent focus:outline-none text-blueish-600"
             placeholder="Type Stock Name Here..."
           />
+        </div>
 
           {filteredStocks.length > 0 && (
             <ComboboxOptions className="absolute mt-1 bg-white rounded-xl shadow-2xl z-10">

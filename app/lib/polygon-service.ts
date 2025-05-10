@@ -1,7 +1,7 @@
 import { DailyData } from "@/app/lib/definitions";
 
-const BASE_URL = `https://api.polygon.io/v2`;
-const API_KEY = "NbONcR7tNxv8Y04sQv1p2WtwXl3QpbVR";
+const BASE_URL = process.env.POLYGON_API_BASE_URL;
+const API_KEY = process.env.POLYGON_API_KEY;
 
 // store both data and the timestamp
 const cache: Record<string, { data: DailyData[]; timestamp: number | undefined }> = {};

@@ -7,10 +7,10 @@ export function DailyAggregateChartSkeleton() {
     <div className="overflow-hidden">
       <div className={`${shimmer} relative ovflow-hidden p-2`}>
         <div className="flex justify-between items-end">
-          <div className="rounded-md bg-gray-200 h-6 w-20 2xl:h-12 2xl:w-32" />
-          <div className="rounded-md bg-gray-200 h-4 w-24 2xl:h-8 2xl:w-36" />
+          <div className="rounded-md bg-gray-200 h-6 w-20 lg:h-12 lg:w-32" />
+          <div className="rounded-md bg-gray-200 h-4 w-24 lg:h-8 lg:w-36" />
         </div>
-        <div className="bg-gray-200 rounded-xl h-90 w-full mt-6"></div>
+        <div className="bg-gray-200 rounded-xl w-full mt-6 h-60 lg:h-72 2xl:h-90"></div>
       </div>
     </div>
   );
@@ -27,8 +27,8 @@ export function DashboardOverviewPanelsSkeleton() {
 
 export function DashboardTopPanelsSkeleton() {
   return (
-    <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 xl:grid-cols-9">
-      <div className="col-span-1 md:col-span-3 xl:col-span-6">
+    <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-9">
+      <div className="col-span-1 xl:col-span-6">
         <Panel title="Stock Price (Past 2 Years)">
           <DailyAggregateChartSkeleton />
         </Panel>
@@ -51,7 +51,7 @@ export function MonthlyAggregateChartSkeleton() {
           <div className="rounded-md bg-gray-200 h-4 w-full 2xl:h-8" />
           <div className="rounded-md bg-gray-200 h-4 w-full 2xl:h-8 mt-2" />
         </div>
-        <div className="bg-gray-200 rounded-xl h-90 w-full mt-8"></div>
+        <div className="bg-gray-200 rounded-xl w-full mt-8 h-60 lg:h-72 2xl:h-90"></div>
       </div>
     </div>
   );

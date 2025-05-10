@@ -1,5 +1,5 @@
+import { redirect } from 'next/navigation';
+
 export default function Page() {
-  return (
-    <p></p>
-  )
+  redirect('/stock/AAPL');
 }

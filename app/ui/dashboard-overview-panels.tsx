@@ -7,8 +7,12 @@ export default async function DashboardOverviewPanels({ stockSymbol }: { stockSy
   
   return (
     <>
-      <FinancialOverviewPanel data={companyMetrics} />
-      <RiskGrowthPanel data={companyMetrics} />
+      <div className="col-span-1 md:col-span-2 xl:col-span-1">
+        <FinancialOverviewPanel data={companyMetrics} />
+      </div>
+      <div className="col-span-1 md:col-span-2 xl:col-span-1">
+        <RiskGrowthPanel data={companyMetrics} />
+      </div>
     </>
   );
 }
