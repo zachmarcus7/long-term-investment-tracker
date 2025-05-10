@@ -18,6 +18,10 @@ export default function NewStockForm({
 }) {
   const [selectedStock, setSelectedStock] = useState<StockSymbol | null>(null);
   const [query, setQuery] = useState('');
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
 
   /**
    * Filters the list of stock symbols based on the current search query.
@@ -79,7 +83,7 @@ export default function NewStockForm({
             <ComboboxOptions className="absolute mt-1 bg-white rounded-xl shadow-2xl z-10">
               <List
                 height={250}
-                width={436}
+                width={(windowSize.width < 768) ? 375 : 436}
                 itemCount={filteredStocks.length}
                 itemSize={45}
               >

@@ -20,7 +20,7 @@ export function formatStockName(stockName: string) {
     .map(word => (capitalizeFirstLetter(word)))
     .join(' ');
 
-  return (formatted.length > 20)
-    ? `${formatted.slice(0, 17)}...`
+  return (formatted.length > 30)
+    ? `${formatted.slice(0, 27)}...`
     : formatted;
 }

@@ -45,7 +45,7 @@ export default function Dialog({
         >
           <motion.div
             {...dialogInnerAnimation}
-            className="rounded-4xl p-2 bg-white shadow-5xl relative lg:min-h-64 lg:min-w-[500px] lg:p-3 2xl:p-4"
+            className="rounded-4xl p-2 bg-white shadow-5xl relative max-md:w-[95%] lg:min-h-64 lg:min-w-[500px] lg:p-3 2xl:p-4"
           >
 
             {/* Header */}
