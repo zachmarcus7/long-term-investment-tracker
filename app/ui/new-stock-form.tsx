@@ -18,10 +18,7 @@ export default function NewStockForm({
 }) {
   const [selectedStock, setSelectedStock] = useState<StockSymbol | null>(null);
   const [query, setQuery] = useState('');
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
-  });
+  const [windowSize] = useState({ width: window.innerWidth });
 
   /**
    * Filters the list of stock symbols based on the current search query.
