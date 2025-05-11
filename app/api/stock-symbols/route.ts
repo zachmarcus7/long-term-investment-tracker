@@ -4,7 +4,7 @@ export async function GET() {
   try {
     const res = await getStockSymbols();
     return Response.json(res);
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error in API route:', error);
   }
 }
