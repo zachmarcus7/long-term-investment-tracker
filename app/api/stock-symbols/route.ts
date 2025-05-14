@@ -4,5 +4,8 @@ export async function GET() {
   try {
     const res = await getStockSymbols();
     return Response.json(res);
-  } catch { }
+  } catch (error) {
+    console.log('Error fetching stock symbols:', error);
+    return new Response('Failed to fetch stock symbols', { status: 500 });
+  }
 }
