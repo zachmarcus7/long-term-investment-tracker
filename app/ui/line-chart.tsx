@@ -88,9 +88,7 @@ export default function LineChart({
       }
     },
     plugins: {
-      legend: {
-        display: false,
-      }
+      legend: { display: false }
     }
   };
 
