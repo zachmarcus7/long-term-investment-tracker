@@ -43,5 +43,5 @@ export async function getStockSymbols(): Promise<StockSymbol[]> {
 
   const allSymbols: StockSymbol[] = await res.json();
 
-  return allSymbols.slice(0, 50);  // return only the first 50
+  return allSymbols.slice(0, 1);  // return only the first 50
 }
