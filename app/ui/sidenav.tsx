@@ -45,17 +45,17 @@ export default function SideNav() {
   useEffect(() => {
     setTrackedStocks(retrieveTrackedStocks());
 
-    // const fetchData = async () => {
-    //   try {
-    //     const res = await fetch('/api/stock-symbols');
-    //     const data = await res.json();
-    //     setStockSymbols(data);
-    //   } catch (err) {
-    //     console.error('Failed to fetch stock symbols:', err);
-    //   }
-    // };
+    const fetchData = async () => {
+      try {
+        const res = await fetch('/api/stock-symbols');
+        const data = await res.json();
+        setStockSymbols(data);
+      } catch (err) {
+        console.error('Failed to fetch stock symbols:', err);
+      }
+    };
 
-    //fetchData();
+    fetchData();
   }, []);
 
   /**
