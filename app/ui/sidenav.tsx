@@ -21,6 +21,24 @@ export default function SideNav() {
   const [pendingAdd, setPendingAdd] = useState(false);
   const [trackedStocks, setTrackedStocks] = useState<string[]>([]);
 
+  useEffect(() => {
+    window.onerror = (message, source, lineno, colno, error) => {
+      fetch('/api/log-client-error', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, source, lineno, colno, error: error?.stack }),
+      });
+    };
+
+    window.onunhandledrejection = (event) => {
+      fetch('/api/log-client-error', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: event.reason?.message, stack: event.reason?.stack }),
+      });
+    };
+  }, []);
+
   /**
    * Sets available stock symbols on initial render.
    */
