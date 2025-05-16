@@ -55,7 +55,7 @@ export default function SideNav() {
       }
     };
 
-    fetchData();
+    //fetchData();
   }, []);
 
   /**
