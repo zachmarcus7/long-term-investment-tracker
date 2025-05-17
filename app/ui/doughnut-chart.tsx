@@ -36,11 +36,11 @@ export default function DoughnutChart({
           dataArr.strongSell
         ],
         backgroundColor: [
-          'oklch(84.5% 0.143 164.978 / 1)', 
-          'oklch(84.5% 0.143 164.978 / 0.5)',
-          'oklch(0.76 0.04 269.54 / 0.3)',
-          'oklch(0.73 0.16 19.95 / 0.5)',
-          'oklch(0.73 0.16 19.95 / 1)'
+          'rgba(0, 188, 125, 0.5)', 
+          'rgba(0, 188, 125, 0.3)',
+          'rgb(229, 232, 240)',
+          'rgba(239, 94, 99, 0.3)',
+          'rgba(239, 94, 99, 0.8)'
         ],
         borderColor: [],
         borderWidth: 0,
