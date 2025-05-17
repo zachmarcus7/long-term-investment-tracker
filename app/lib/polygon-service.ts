@@ -43,6 +43,9 @@ export async function getDailyAggregates(ticker: string = "AAPL"): Promise<Daily
   const results = json.results || [];
 
   // cache data for future use
-  cache[ticker] = {data: results, timestamp: now };
+  cache[ticker] = { data: results, timestamp: now };
+
+  console.log(results);
+
   return results;
 }
