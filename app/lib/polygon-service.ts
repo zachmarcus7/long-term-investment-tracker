@@ -45,7 +45,5 @@ export async function getDailyAggregates(ticker: string = "AAPL"): Promise<Daily
   // cache data for future use
   cache[ticker] = { data: results, timestamp: now };
 
-  console.log(results);
-
   return results;
 }
