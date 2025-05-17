@@ -21,7 +21,7 @@ export default function LineChart({
       {
         label: 'Price',
         data: data?.map(point => point.c),
-        borderColor: positive ? 'oklch(69.6% 0.17 162.48)' : 'oklch(0.67 0.18 21.29)',
+        borderColor: positive ? 'rgba(0, 128, 0, 0.3)' : 'rgba(0, 128, 0, 0.3)',
         borderWidth: 1.5,
         fill: true,
         tension: 0.1,
@@ -33,17 +33,17 @@ export default function LineChart({
         
           // Make sure chartArea is available
           if (!chartArea) {
-            return 'oklch(0.76 0.04 269.54 / 0.3)';
+            return 'grey';
           }
         
           const gradient = canvasCtx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
 
           if (positive) {
-            gradient.addColorStop(0, 'oklch(76.5% 0.177 163.223 / 0.3)');
-            gradient.addColorStop(1, 'oklch(76.5% 0.177 163.223 / 0)');
+            gradient.addColorStop(0, 'rgba(0, 128, 0, 0.3)');
+            gradient.addColorStop(1, 'rgba(0, 128, 0, 0.3)');
           } else {
-            gradient.addColorStop(1, 'oklch(0.73 0.16 19.95 / 0.1)');
-            gradient.addColorStop(0, 'oklch(0.73 0.16 19.95 / 0.7)');
+            gradient.addColorStop(1, 'rgba(0, 128, 0, 0.3)');
+            gradient.addColorStop(0, 'rgba(0, 128, 0, 0.3)');
           }
         
           return gradient;
@@ -71,16 +71,16 @@ export default function LineChart({
         },
         title: { display: false },
         ticks: { 
-          color: 'oklch(0.76 0.04 269.54)',
+          color: 'rgba(0, 128, 0, 0.3)',
           maxTicksLimit: 12
         },
         grid: { display: false }
       },
       y: {
         title: { display: false },
-        ticks: { color: 'oklch(0.76 0.04 269.54)' },
+        ticks: { color: 'rgba(0, 128, 0, 0.3)' },
         grid: { 
-          color: 'oklch(96.7% 0.001 286.375)'
+          color: 'rgba(0, 128, 0, 0.3)'
         },
         border: {
           dash: [6, 6]
