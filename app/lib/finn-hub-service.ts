@@ -41,7 +41,5 @@ export async function getStockSymbols(): Promise<StockSymbol[]> {
   if (!res.ok)
     throw new Error(`Failed to fetch stock symbols`);
 
-  const allSymbols: StockSymbol[] = await res.json();
-
-  return allSymbols.slice(0, 1);  // return only the first 50
+  return await res.json();
 }

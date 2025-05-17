@@ -22,19 +22,11 @@ export default function SideNav() {
   const [trackedStocks, setTrackedStocks] = useState<string[]>([]);
 
   useEffect(() => {
-    window.onerror = (message, source, lineno, colno, error) => {
+    window.onerror = (message, source, lineno, colno) => {
       fetch('/api/log-client-error', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, source, lineno, colno, error: error?.stack }),
-      });
-    };
-
-    window.onunhandledrejection = (event) => {
-      fetch('/api/log-client-error', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: event.reason?.message, stack: event.reason?.stack }),
+        body: JSON.stringify({ message, source, lineno, colno }),
       });
     };
   }, []);
