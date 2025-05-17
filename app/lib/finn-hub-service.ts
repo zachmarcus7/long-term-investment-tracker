@@ -1,5 +1,4 @@
 import { CompanyMetricsData, RecommendationData, StockSymbol } from "@/app/lib/definitions";
-import { NextRequest } from "next/server";
 
 const BASE_URL = process.env.FINNHUB_API_BASE_URL;
 const API_KEY = process.env.FINNHUB_API_KEY;
