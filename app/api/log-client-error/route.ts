@@ -1,4 +1,6 @@
-export async function POST(req: { message: string, source: string, lineno: string, colno: string }) {
+import { NextRequest } from "next/server";
+
+export async function POST(req: Request | NextRequest) {
   try {
     console.log(req);
     return new Response('', {status: 200});
