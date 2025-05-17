@@ -4,9 +4,10 @@ import { DashboardOverviewPanelsSkeleton, DashboardTopPanelsSkeleton, Recommenda
 import DashboardTopPanels from '@/app/ui/dashboard-top-panels';
 import RecommendationsPanel from '@/app/ui/recommendations-panel';
 
-export default async function Page(props: { params: Promise<{ symbol: string }> }) {
-  const params = await props.params;
-  const currentStock = params.symbol;
+export default async function Page(/*props: { params: Promise<{ symbol: string }> }*/) {
+  //const params = await props.params;
+  //const currentStock = params.symbol;
+  const currentStock = 'AAPL';
 
   return (
       <div className="flex-grow md:overflow-y-auto shadow-3xl bg-main p-6 md:p-10 xl:p-12">
