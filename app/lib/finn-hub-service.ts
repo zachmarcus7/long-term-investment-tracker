@@ -44,11 +44,3 @@ export async function getStockSymbols(): Promise<StockSymbol[]> {
 
   return await res.json();
 }
-
-/**
- * Error debugging helper.
- */
-export async function postFinnHubError(req: Request | NextRequest) {
-  console.log(req);
-  return [];
-}
