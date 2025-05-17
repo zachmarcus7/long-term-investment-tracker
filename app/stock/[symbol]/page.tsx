@@ -1,8 +1,8 @@
-import { Suspense } from 'react';
-import DashboardOverviewPanels from '@/app/ui/dashboard-overview-panels';
-import { DashboardOverviewPanelsSkeleton, DashboardTopPanelsSkeleton, RecommendationsPanelSkeleton } from '@/app/ui/skeletons';
-import DashboardTopPanels from '@/app/ui/dashboard-top-panels';
-import RecommendationsPanel from '@/app/ui/recommendations-panel';
+// import { Suspense } from 'react';
+// import DashboardOverviewPanels from '@/app/ui/dashboard-overview-panels';
+// import { DashboardOverviewPanelsSkeleton, DashboardTopPanelsSkeleton, RecommendationsPanelSkeleton } from '@/app/ui/skeletons';
+// import DashboardTopPanels from '@/app/ui/dashboard-top-panels';
+// import RecommendationsPanel from '@/app/ui/recommendations-panel';
 
 export default async function Page(/*props: { params: Promise<{ symbol: string }> }*/) {
   //const params = await props.params;
