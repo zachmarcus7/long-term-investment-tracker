@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
-import DashboardTopPanels from '@/app/ui/dashboard-top-panels';
-import { DashboardTopPanelsSkeleton } from '@/app/ui/skeletons';
-// import DashboardOverviewPanels from '@/app/ui/dashboard-overview-panels';
-// import { DashboardOverviewPanelsSkeleton, RecommendationsPanelSkeleton } from '@/app/ui/skeletons';
-// import RecommendationsPanel from '@/app/ui/recommendations-panel';
+// import DashboardTopPanels from '@/app/ui/dashboard-top-panels';
+// import { DashboardTopPanelsSkeleton } from '@/app/ui/skeletons';
+import DashboardOverviewPanels from '@/app/ui/dashboard-overview-panels';
+import { DashboardOverviewPanelsSkeleton, RecommendationsPanelSkeleton } from '@/app/ui/skeletons';
+import RecommendationsPanel from '@/app/ui/recommendations-panel';
 
 export default async function Page(props: { params: Promise<{ symbol: string }> }) {
   const params = await props.params;
@@ -21,12 +21,12 @@ export default async function Page(props: { params: Promise<{ symbol: string }> 
             <span className={`pl-1 font-extrabold text-emerald-500`}>{currentStock}</span> is the current selected stock.
           </span>
         </h6>
-
+{/* 
         <Suspense fallback={<DashboardTopPanelsSkeleton />}>
           <DashboardTopPanels stockSymbol={currentStock} />
-        </Suspense>
+        </Suspense> */}
         
-        {/*
+        
         <div className="mt-6 grid gap-6 grid-cols-1 md:grid-cols-4">
 
           <Suspense fallback={<DashboardOverviewPanelsSkeleton />}>
@@ -37,7 +37,7 @@ export default async function Page(props: { params: Promise<{ symbol: string }> 
             <RecommendationsPanel stockSymbol={currentStock} />
           </Suspense>
 
-        </div> */}
+        </div> 
 
       </main>
 
