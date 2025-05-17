@@ -3,7 +3,7 @@
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, TimeScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler } from 'chart.js';
 import 'chartjs-adapter-date-fns';
-import { StockDataPoint } from '@/app/lib/definitions';
+import { DailyData } from '@/app/lib/definitions';
 
 ChartJS.register(Filler);
 ChartJS.register(TimeScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
@@ -12,7 +12,7 @@ export default function LineChart({
   data,
   positive
 }: {
-  data?: StockDataPoint[];
+  data?: DailyData[];
   positive: boolean
 }) {
   const chartData = {

@@ -1,4 +1,4 @@
-//import LineChart from "@/app/ui/line-chart";
+import LineChart from "@/app/ui/line-chart";
 import { ArrowUpRightIcon, ArrowDownRightIcon } from "@heroicons/react/24/outline";
 import { getYearlyChange, getPercentChange } from "@/app/lib/polygon-utils";
 import { DailyData } from "@/app/lib/definitions";
@@ -33,9 +33,9 @@ export default function DailyAggregateChart({
 
       </div>
 
-      {/* <div className="lg:h-[280px] 2xl:h-[300px] 3xl:h-[400px] 4xl:h-[450px]">
+      <div className="lg:h-[280px] 2xl:h-[300px] 3xl:h-[400px] 4xl:h-[450px]">
         <LineChart data={data} positive={positive} />
-      </div> */}
+      </div>
 
     </div>
   );
