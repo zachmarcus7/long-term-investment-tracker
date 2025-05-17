@@ -21,7 +21,7 @@ export default function LineChart({
       {
         label: 'Price',
         data: data?.map(point => point.c),
-        borderColor: positive ? 'rgba(0, 128, 0, 0.3)' : 'rgba(0, 128, 0, 0.3)',
+        borderColor: positive ? 'rgba(0, 188, 125, 1)' : 'rgba(239, 94, 99, 1)',
         borderWidth: 1.5,
         fill: true,
         tension: 0.1,
@@ -33,17 +33,17 @@ export default function LineChart({
         
           // Make sure chartArea is available
           if (!chartArea) {
-            return 'grey';
+            return 'rgb(229, 232, 240)';
           }
         
           const gradient = canvasCtx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
 
           if (positive) {
-            gradient.addColorStop(0, 'rgba(0, 128, 0, 0.3)');
-            gradient.addColorStop(1, 'rgba(0, 128, 0, 0.3)');
+            gradient.addColorStop(1, 'rgba(0, 188, 125, 0.08)');
+            gradient.addColorStop(0, 'rgba(0, 188, 125, 0.5)');
           } else {
-            gradient.addColorStop(1, 'rgba(0, 128, 0, 0.3)');
-            gradient.addColorStop(0, 'rgba(0, 128, 0, 0.3)');
+            gradient.addColorStop(1, 'rgba(239, 94, 99, 0.1)');
+            gradient.addColorStop(0, 'rgba(239, 94, 99, 0.5)');
           }
         
           return gradient;
@@ -71,16 +71,16 @@ export default function LineChart({
         },
         title: { display: false },
         ticks: { 
-          color: 'rgba(0, 128, 0, 0.3)',
+          color: 'rgb(176, 185, 208)',
           maxTicksLimit: 12
         },
         grid: { display: false }
       },
       y: {
         title: { display: false },
-        ticks: { color: 'rgba(0, 128, 0, 0.3)' },
+        ticks: { color: 'rgb(176, 185, 208)' },
         grid: { 
-          color: 'rgba(0, 128, 0, 0.3)'
+          color: 'rgba(229, 232, 240, 0.5)'
         },
         border: {
           dash: [6, 6]

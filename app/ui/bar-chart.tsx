@@ -29,18 +29,18 @@ export default function BarChart({
           const { chartArea, ctx: canvasCtx } = chart;
         
           if (!chartArea) {
-            return 'oklch(0.76 0.04 269.54 / 0.3)';
+            return 'rgb(229, 232, 240)';
           }
         
           const roi = chartData[ctx.dataIndex]?.roi ?? 0;
           const gradient = canvasCtx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
         
           if (roi >= 0) {
-            gradient.addColorStop(0, 'oklch(84.5% 0.143 164.978 / 0.7)');
-            gradient.addColorStop(1, 'oklch(84.5% 0.143 164.978 / 0.1)');
+            gradient.addColorStop(0, 'rgba(0, 188, 125, 0.5)');
+            gradient.addColorStop(1, 'rgba(0, 188, 125, 0.1)');
           } else {
-            gradient.addColorStop(0, 'oklch(0.73 0.16 19.95 / 0.1)');
-            gradient.addColorStop(1, 'oklch(0.73 0.16 19.95 / 0.7)');
+            gradient.addColorStop(0, 'rgba(239, 94, 99, 0.1)');
+            gradient.addColorStop(1, 'rgba(239, 94, 99, 0.8)');
           }
         
           return gradient;
@@ -64,10 +64,10 @@ export default function BarChart({
       y: {
         ticks: {
           callback: function (val: string | number) { return `${val}%` },
-          color: 'oklch(0.76 0.04 269.54)'
+          color: 'rgb(176, 185, 208)'
         },
         grid: { 
-          color: 'oklch(96.7% 0.001 286.375)',
+          color: 'rgba(229, 232, 240, 0.5)',
         },
         border: {
           dash: [6, 6]
@@ -75,7 +75,7 @@ export default function BarChart({
       },
       x: {
         ticks: { 
-          color: 'oklch(0.76 0.04 269.54)',
+          color: 'rgb(176, 185, 208)',
           maxTicksLimit: 6,
           callback: function(value: number | string) { return chartData[Number(value)].label.split(" ")[0] }
         },
