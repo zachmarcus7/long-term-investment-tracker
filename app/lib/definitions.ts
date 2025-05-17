@@ -16,12 +16,14 @@ export type CompanyMetricsData = {
 }
 
 export type DailyData = {
-  t: number;
+  v: number;
+  vw: number;
   o: number;
+  c: number;
   h: number;
   l: number;
-  c: number;
-  v: number;
+  t: number;
+  n: number;
 };
 
 export type DailyDataResponse = {
