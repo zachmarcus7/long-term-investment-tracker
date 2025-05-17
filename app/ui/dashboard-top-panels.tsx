@@ -8,7 +8,7 @@ export default async function DashboardTopPanels({ stockSymbol }: { stockSymbol:
 
   return (
     <p>{polygonData.map(d => (
-      <span>{d.c}</span>
+      <span key={d.c}>{d.c}</span>
     ))}</p>
     // <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-9">
     //   <div className="col-span-1 xl:col-span-6">
