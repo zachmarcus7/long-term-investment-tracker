@@ -7,7 +7,7 @@
 export default async function Page(/*props: { params: Promise<{ symbol: string }> }*/) {
   //const params = await props.params;
   //const currentStock = params.symbol;
-  const currentStock = 'AAPL';
+  //const currentStock = 'AAPL';
 
   return (
     <p>mobile test</p>
