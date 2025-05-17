@@ -1,6 +1,6 @@
 import { getDailyAggregates } from '@/app/lib/polygon-service';
 import DailyAggregateChart from '@/app/ui/daily-aggregate-chart';
-import MonthlyAggregateChart from '@/app/ui/monthly-aggregate-chart';
+//import MonthlyAggregateChart from '@/app/ui/monthly-aggregate-chart';
 import { Panel } from '@/app/ui/panel';
 
 export default async function DashboardTopPanels({ stockSymbol }: { stockSymbol: string }) {
@@ -15,9 +15,9 @@ export default async function DashboardTopPanels({ stockSymbol }: { stockSymbol:
       </div>
 
       <div className="col-span-1 xl:col-span-3">
-        <Panel title="Return On Investment">
+        {/* <Panel title="Return On Investment">
           <MonthlyAggregateChart data={polygonData} selectedTicker={stockSymbol} />
-        </Panel>
+        </Panel> */}
       </div>
     </div>
   );
