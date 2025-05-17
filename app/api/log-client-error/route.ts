@@ -1,8 +1,9 @@
 import { NextRequest } from "next/server";
+import { postFinnHubError } from "@/app/lib/finn-hub-service";
 
 export async function POST(req: Request | NextRequest) {
   try {
-    console.log(req);
+    postFinnHubError(req);
     return new Response('', {status: 200});
   } catch (error) {
     console.log('Error fetching stock symbols:', error);

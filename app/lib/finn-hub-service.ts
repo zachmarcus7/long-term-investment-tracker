@@ -1,4 +1,5 @@
 import { CompanyMetricsData, RecommendationData, StockSymbol } from "@/app/lib/definitions";
+import { NextRequest } from "next/server";
 
 const BASE_URL = process.env.FINNHUB_API_BASE_URL;
 const API_KEY = process.env.FINNHUB_API_KEY;
@@ -42,4 +43,12 @@ export async function getStockSymbols(): Promise<StockSymbol[]> {
     throw new Error(`Failed to fetch stock symbols`);
 
   return await res.json();
+}
+
+/**
+ * Error debugging helper.
+ */
+export async function postFinnHubError(req: Request | NextRequest) {
+  console.log(req);
+  return [];
 }
