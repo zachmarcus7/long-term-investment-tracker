@@ -14,7 +14,7 @@ export default async function Page(props: { params: Promise<{ symbol: string }> 
 
       <main className="2xl:px-4 3xl:px-20 4xl:px-54">
 
-        <h1 className="mb-4 font-extrabold text-2xl text-blueish-600 md:text-3xl">Overview</h1>
+        <h1 className="mb-4 font-extrabold text-2xl md:text-3xl">Overview</h1>
         <h6 className="text-greyish-300 mb-4 text-sm 2xl:text-base">
           Welcome to Long Term Track!{' '}
           <span>
